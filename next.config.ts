@@ -49,16 +49,17 @@ const nextConfig: NextConfig = {
 					{
 						key: "Content-Security-Policy",
 						value: `
-						default-src 'self';
-						script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://*.googletagmanager.com;
-						style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-						img-src 'self' data: blob: https://cdn.sanity.io https://*.shopifycdn.com;
-						font-src 'self' https://fonts.gstatic.com;
-						connect-src 'self' https://cdn.sanity.io https://*.ingest.sentry.io;
-						frame-ancestors 'none';
-						object-src 'none';
-						base-uri 'self';
-					`
+							default-src 'self';
+							script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://*.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com;
+							style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+							img-src 'self' data: blob: https://cdn.sanity.io https://*.shopifycdn.com https://i.ytimg.com;
+							font-src 'self' https://fonts.gstatic.com;
+							connect-src 'self' https://cdn.sanity.io https://*.ingest.sentry.io;
+							frame-src https://www.youtube.com https://www.youtube-nocookie.com;
+							frame-ancestors 'none';
+							object-src 'none';
+							base-uri 'self';
+						`
 							.replace(/\s{2,}/g, " ")
 							.trim(),
 					},
