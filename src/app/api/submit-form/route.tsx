@@ -22,7 +22,12 @@ interface FormData {
 async function verifyTurnstileCaptcha(
 	captchaResponse: string
 ): Promise<boolean> {
-	const turnstileSecret = "0x4AAAAAABC4ENbSHLu9O8yQiBrBDcU1ws0"; // Your secret key from Turnstile
+	const turnstileSecret = process.env.TURNSTILE_SECRET;
+
+	if (!turnstileSecret) {
+		return false;
+	}
+
 	const response = await fetch(
 		"https://challenges.cloudflare.com/turnstile/v0/siteverify",
 		{
@@ -35,7 +40,7 @@ async function verifyTurnstileCaptcha(
 	);
 
 	const result = (await response.json()) as { success: boolean };
-	return result.success; // returns true if the CAPTCHA was validated successfully
+	return result.success;
 }
 
 export async function POST(request: Request) {
@@ -98,7 +103,8 @@ export async function POST(request: Request) {
 		// Email content
 		let mailOptions;
 		if (
-			(contactFormType === "Case-Study" || contactFormType === "Whitepaper") &&
+			(contactFormType === "Case-Study" ||
+				contactFormType === "Whitepaper") &&
 			base64FileContent
 		) {
 			mailOptions = {
@@ -115,7 +121,8 @@ export async function POST(request: Request) {
 				],
 			};
 		} else if (
-			(contactFormType === "Whitepaper" || contactFormType === "Case-Study") &&
+			(contactFormType === "Whitepaper" ||
+				contactFormType === "Case-Study") &&
 			url
 		) {
 			mailOptions = {
@@ -174,11 +181,10 @@ export async function POST(request: Request) {
 
 		await client.create(submission);
 
-	if (contactFormType !== "Subscribe") {
-		const slackWebhookUrl =
-			"https://hooks.slack.com/services/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";
+		if (contactFormType !== "Subscribe") {
+			const slackWebhookUrl = process.env.SLACK_WEBHOOK || "";
 
-		const slackMessage = `New contact form submission:
+			const slackMessage = `New contact form submission:
 		*First Name:* ${firstName}
 		*Last Name:* ${lastName}
 		*Email:* ${email}
@@ -191,24 +197,24 @@ export async function POST(request: Request) {
 		*Timestamp:* ${new Date().toISOString()}
 		`;
 
-		try {
-			const response = await fetch(slackWebhookUrl, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ text: slackMessage }),
-			});
+			try {
+				const response = await fetch(slackWebhookUrl, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ text: slackMessage }),
+				});
 
-			if (!response.ok) {
-				return console.error("Failed to send message to Slack");
+				if (!response.ok) {
+					return console.error("Failed to send message to Slack");
+				}
+
+				console.log("Message sent to Slack successfully!");
+			} catch (error) {
+				console.error(error);
 			}
-
-			console.log("Message sent to Slack successfully!");
-		} catch (error) {
-			console.error(error);
 		}
-	}
 
 		return NextResponse.json({
 			message: "Emails sent and data saved to Sanity successfully!",
