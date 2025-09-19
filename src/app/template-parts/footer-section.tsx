@@ -7,7 +7,7 @@ export default function FooterSection(props: {
 	ctaUrl: string;
 }) {
 	return (
-		<div className="footer-section second-banner-bg min-h-screen bg-[url(/images/ft-bg.png)] bg-center bg-no-repeat bg-cover">
+		<div className="footer-section second-banner-bg min-h-screen bg-[url(/images/ft-bg.jpg)] bg-center bg-no-repeat bg-cover">
 			<div className="banner max-w-[1220px] mx-auto py-36 xl:px-0 px-5">
 				<div className="col max-w-[1113px]">
 					<h3 className="xl:text-[96px] lg:text-[80px] md:text-[60px] text-[40px] text-[var(--alembic-black)] xl:leading-[92px] lg:leading-[92px] leading-[45px] ">
