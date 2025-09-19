@@ -5,7 +5,7 @@ import { getData, urlFor } from "../utility-functions";
 import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import FooterSection from "../template-parts/footer-section";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 import Button from "../components/Button";
 
 const NEWS_QUERY = `*[
@@ -16,7 +16,7 @@ const PRESS_QUERY = `*[
   _type == "press" && !(_id in path("drafts.**"))
 ]|order(publishedAt desc){_id, title, publishedAt, cta}`;
 
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 const POSTS_PER_PAGE = 5;
 
 const query = `*[_type == "newsPage"][0]{_id, seo}`;
@@ -26,10 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/news`;
+		const canonicalUrl = `${SITE_URL}/news`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"

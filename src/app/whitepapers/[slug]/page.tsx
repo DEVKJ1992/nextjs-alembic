@@ -2,11 +2,11 @@ import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
 import WhitepaperPage from "./whitepaper-page";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+import { SITE_URL } from "../../constants/site";
 
 const POST_QUERY = `*[_type == "whitepaper" && type == "Whitepaper" && slug.current == $slug][0]{_id, title, eyebrowTitle, shortTitle, description, slug, metaImage, metaTitle, metaDescription, url, "whitepaperURL": uploadWhitepaper.asset->url}`;
 
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata({
 	params,
@@ -19,10 +19,7 @@ export async function generateMetadata({
 		options
 	);
 
-	const headersList = await headers();
-	const host = headersList.get("host");
-	const protocol = headersList.get("x-forwarded-proto") || "https";
-	const canonicalUrl = `${protocol}://${host}/whitepapers/${(await params).slug}`;
+	const canonicalUrl = `${SITE_URL}/whitepapers/${(await params).slug}`;
 
 	return {
 		title: whitepaper.metaTitle

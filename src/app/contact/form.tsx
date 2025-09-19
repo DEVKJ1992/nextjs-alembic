@@ -1,11 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
 import FooterSection from "../template-parts/footer-section";
-import { getData } from "../utility-functions";
 import { PortableText } from "next-sanity";
+import { PortableTextBlock } from "sanity";
 
-const data = await getData(`*[_type == "contactPage"][0]`, "Contact Page");
-export default function ContactForm() {
+type FormPage = {
+	eyeBrowTitle: string;
+	pageTitle: string;
+	body: PortableTextBlock[];
+	footer: {
+		title: string;
+		text: string;
+		buttonText: string;
+		buttonURL: string;
+	};
+};
+
+type Props = {
+	data: FormPage;
+};
+
+export default function ContactForm({ data }: Props) {
 	useEffect(() => {
 		// Load Turnstile script dynamically
 		const script = document.createElement("script");

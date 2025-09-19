@@ -1,26 +1,22 @@
 import React from "react";
-import Link from "next/link";
 import FooterSection from "../template-parts/footer-section";
 import { PortableText, type SanityDocument } from "next-sanity";
 import { getData, components, Links } from "../utility-functions";
 import TextLinks from "../template-parts/legal-nav";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 import { client } from "@/sanity/client";
 import Button from "../components/Button";
 
 const query = `*[_type == "soc3Page"][0]{_id, seo}`;
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/soc-3`;
+		const canonicalUrl = `${SITE_URL}/soc-3`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"

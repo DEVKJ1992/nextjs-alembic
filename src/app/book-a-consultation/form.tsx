@@ -1,15 +1,27 @@
 "use client";
 import { useState, useEffect } from "react";
 import FooterSection from "../template-parts/footer-section";
-import { getData, components } from "../utility-functions";
+import { components } from "../utility-functions";
 import { PortableText } from "next-sanity";
+import { PortableTextBlock } from "sanity";
 
-const data = await getData(
-	`*[_type == "consultationPage"][0]`,
-	"Consultation Page"
-);
+type FormPage = {
+	eyeBrowTitle: string;
+	pageTitle: string;
+	body: PortableTextBlock[];
+	footer: {
+		title: string;
+		text: string;
+		buttonText: string;
+		buttonURL: string;
+	};
+};
 
-export default function TalkForm() {
+type Props = {
+	data: FormPage;
+};
+
+export default function TalkForm({ data }: Props) {
 	useEffect(() => {
 		// Load Turnstile script dynamically
 		const script = document.createElement("script");

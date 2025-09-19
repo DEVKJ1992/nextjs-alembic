@@ -9,14 +9,14 @@ import { client } from "@/sanity/client";
 import FooterSection from "../template-parts/footer-section";
 import SubscribeForm from "../template-parts/subscribe/subscribe-form";
 import { Metadata } from "next";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current) && !(_id in path("drafts.**"))
 ]|order(publishedAt desc)[$start...$end]{_id, title, slug, image, publishedAt, author, category}`;
 
-const options = { next: { revalidate: 60 } };
+const options = { next: { revalidate: 3600 } };
 const POSTS_PER_PAGE = 10;
 
 const query = `*[_type == "blogPage"][0]{_id, seo}`;
@@ -26,10 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/blog`;
+		const canonicalUrl = `${SITE_URL}/blog`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"

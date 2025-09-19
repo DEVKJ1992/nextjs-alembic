@@ -2,20 +2,19 @@ import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import { type SanityDocument } from "next-sanity";
 import TalkForm from "./form";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
+import { getData } from "../utility-functions";
+import { PortableTextBlock } from "sanity";
 
 const query = `*[_type == "consultationPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/book-a-consultation`;
+		const canonicalUrl = `${SITE_URL}/book-a-consultation`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
@@ -45,6 +44,27 @@ export async function generateMetadata(): Promise<Metadata> {
 	}
 }
 
-export default function ConsultationPage() {
-	return <TalkForm />;
+type FormPage = {
+	eyeBrowTitle: string;
+	pageTitle: string;
+	body: PortableTextBlock[];
+	footer: {
+		title: string;
+		text: string;
+		buttonText: string;
+		buttonURL: string;
+	};
+};
+
+export default async function ConsultationPage() {
+	const data = (await getData(
+		`*[_type == "consultationPage"][0]`,
+		"Consultation Page"
+	)) as FormPage | null;
+
+	if (!data) {
+		return null;
+	}
+
+	return <TalkForm data={data} />;
 }

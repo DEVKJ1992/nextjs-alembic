@@ -4,10 +4,23 @@ import React from "react";
 import { MouseEventHandler } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import { type SanityDocument } from "next-sanity";
 import { urlFor } from "../../utility-functions";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+interface Testimonial {
+	_key: string;
+	name: string;
+	designation: string;
+	quote: string;
+	image: SanityImageSource;
+}
+
+type Props = {
+	testimonials: Testimonial[];
+	initialSlide: number;
+};
 
 // Custom Previous Arrow Component
 function SamplePrevArrow(props: { onClick: MouseEventHandler }) {
@@ -36,17 +49,17 @@ function SampleNextArrow(props: { onClick: MouseEventHandler }) {
 	);
 }
 
-export default function TestimonialSliderTemplate(props: {
-	testimonials: SanityDocument;
-	initialSlide: number;
-}) {
+export default function TestimonialSliderTemplate({
+	testimonials,
+	initialSlide,
+}: Props) {
 	const settings = {
 		dots: false,
 		arrows: true,
 		infinite: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		initialSlide: props.initialSlide,
+		initialSlide: initialSlide,
 		nextArrow: (
 			<SampleNextArrow
 				onClick={() => console.log("Prev arrow clicked!")}
@@ -62,7 +75,7 @@ export default function TestimonialSliderTemplate(props: {
 	return (
 		<div className="relative">
 			<Slider {...settings}>
-				{props?.testimonials?.map((testimonial: SanityDocument) => (
+				{testimonials?.map((testimonial) => (
 					<div className="slides" key={testimonial._key}>
 						<div className="flex flex-row flex-wrap max-w-[1210px]">
 							<div className="md:basis-1/3 w-[100%] mt-5">

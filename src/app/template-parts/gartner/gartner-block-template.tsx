@@ -3,9 +3,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "../../utility-functions";
-import { type SanityDocument } from "next-sanity";
 
-export default function GartnerBlockTemplate({ data }: SanityDocument) {
+type GartnerBlock = {
+	title: string;
+	url: string;
+	ctaText: string;
+	logo: {
+		_type: "image";
+		asset: {
+			_type: "reference";
+			_ref: string;
+		};
+	};
+};
+
+type Props = {
+	data: GartnerBlock;
+};
+export default function GartnerBlockTemplate({ data }: Props) {
 	if (!data) {
 		return null;
 	}

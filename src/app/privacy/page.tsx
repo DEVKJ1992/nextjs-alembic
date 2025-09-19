@@ -11,20 +11,17 @@ import FooterSection from "../template-parts/footer-section";
 
 import { Metadata } from "next";
 import { client } from "@/sanity/client";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 
 const query = `*[_type == "privacyPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/privacy`;
+		const canonicalUrl = `${SITE_URL}/privacy`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"

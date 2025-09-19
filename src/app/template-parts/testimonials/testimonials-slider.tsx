@@ -1,16 +1,16 @@
 import { getData } from "../../utility-functions";
-import { type SanityDocument } from "next-sanity";
 import TestimonialSliderTemplate from "./testimonials-slider-template";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-interface Testimonial extends SanityDocument {
+interface Testimonial {
+	_key: string;
 	name: string;
 	designation: string;
 	quote: string;
 	image: SanityImageSource;
 }
 
-interface TestimonialSliderData extends SanityDocument {
+interface TestimonialSliderData {
 	title?: string;
 	testimonials: Testimonial[];
 }

@@ -8,21 +8,18 @@ import { Banner } from "../template-parts/banner";
 import { PortableText, type SanityDocument } from "next-sanity";
 import { Metadata } from "next";
 import { client } from "@/sanity/client";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 import ContentImage from "../template-parts/content-image";
 
 const query = `*[_type == "californiaPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const headersList = await headers();
-		const host = headersList.get("host");
-		const protocol = headersList.get("x-forwarded-proto") || "https";
-		const canonicalUrl = `${protocol}://${host}/created-in-california`;
+		const canonicalUrl = `${SITE_URL}/created-in-california`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"

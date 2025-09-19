@@ -5,10 +5,10 @@ import { Metadata } from "next";
 import { urlFor, components, getData } from "../utility-functions";
 import Image from "next/image";
 import FooterSection from "../template-parts/footer-section";
-import { headers } from "next/headers";
+import { SITE_URL } from "../constants/site";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
-const options = { next: { revalidate: 600 } };
+const options = { next: { revalidate: 3600 } };
 
 export async function generateMetadata({
 	params,
@@ -21,10 +21,7 @@ export async function generateMetadata({
 		options
 	);
 
-	const headersList = await headers();
-	const host = headersList.get("host");
-	const protocol = headersList.get("x-forwarded-proto") || "https";
-	const canonicalUrl = `${protocol}://${host}/${(await params).slug}`;
+	const canonicalUrl = `${SITE_URL}/${(await params).slug}`;
 
 	return {
 		title: post.metaTitle
