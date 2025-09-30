@@ -90,7 +90,7 @@ export default async function JobsPage() {
 	const data = await getData(`*[_type == "careersPage"][0]`, "Careers Page");
 	return (
 		<div className="xl:p-10 lg:p-10 md:p-8 p-5 max-w-[1280px] m-auto">
-			<h1 className="mb-6">{data?.pageTitle}</h1>
+			<h1 className="mb-6 mt-4">{data?.pageTitle}</h1>
 			<div className="max-w-[575px] ml-auto text-[var(--alembic-black)] text-[16px]">
 				<PortableText value={data?.body} />
 			</div>
