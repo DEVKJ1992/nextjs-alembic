@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
 				: page.title
-					? page?.title + " | Alembic"
-					: "Alembic",
+				? page?.title + " | Alembic"
+				: "Alembic",
 			description:
 				page.seo?.metaDescription ?? "Contact us for more information",
 			openGraph: {
@@ -51,7 +51,7 @@ export default async function CompanyPage() {
 
 	return (
 		<div className="Company-parent">
-			<div className="text-section bg-[#FFF] py-20 max-w-[1220px]  mx-auto">
+			<div className="text-section bg-[#FFF] py-20 max-w-[1280px]  mx-auto">
 				<div className="md:pb-20 pb-0 px-5">
 					<h1>{data?.pageTitle}</h1>
 					<div className="max-w-[570px] my-5 ml-auto">
@@ -60,7 +60,7 @@ export default async function CompanyPage() {
 				</div>
 			</div>
 			<div className="company_grid bg-[#F5FAFF] py-20">
-				<div className=" xl:px-0 px-5  max-w-[1220px]  mx-auto">
+				<div className=" xl:px-0 px-5  max-w-[1280px]  mx-auto">
 					<div className="border-b-2 border-[var(--alembic-black)]">
 						<h2 className="font-semibold xl:text-[92px] lg:text-[80px] md:text-[60px] xl:leading-[96px] lg:leading-[96px] md:leading-[60px]">
 							{data?.valuesTitle}

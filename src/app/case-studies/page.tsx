@@ -26,8 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
 				: page.pageTitle
-					? page?.pageTitle + " | Alembic"
-					: "Alembic",
+				? page?.pageTitle + " | Alembic"
+				: "Alembic",
 			description:
 				page.seo?.metaDescription ?? "Contact us for more information",
 			openGraph: {
@@ -71,11 +71,11 @@ export default async function CaseStudiesIndexPage() {
 
 	return (
 		<main>
-			<div className="container max-w-[1250px] mx-auto min-h-screen p-8">
+			<div className="container max-w-[1280px] mx-auto min-h-screen p-8">
 				<h1 className="mb-8 mt-4">{caseStudies?.pageTitle}</h1>
 
 				<div className="">
-					<div className="max-w-[1220px] mx-auto md:py-20 py-5">
+					<div className="max-w-[1280px] mx-auto md:py-20 py-5">
 						<h4 className="md:text-[32px] text-[28px] tracking-[-1px] font-semibold md:text-center">
 							{caseStudies?.logosTitle}
 						</h4>

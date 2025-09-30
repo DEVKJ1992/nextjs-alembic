@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
 				: page.title
-					? page?.title + " | Alembic"
-					: "Alembic",
+				? page?.title + " | Alembic"
+				: "Alembic",
 			description:
 				page.seo?.metaDescription ?? "Contact us for more information",
 			openGraph: {
@@ -108,7 +108,9 @@ export default async function JobsPage() {
 					{jobs?.map((job, index) => (
 						<div
 							key={job.id}
-							className={`md:p-4 p-0 relative ${index === 0 ? "!pt-0" : "border-t !mt-5"}`}
+							className={`md:p-4 p-0 relative ${
+								index === 0 ? "!pt-0" : "border-t !mt-5"
+							}`}
 						>
 							<div className="flex md:flex-row flex-col-reverse justify-between md:items-center items-start md:mt-0 mt-5 gap-2">
 								<h3 className="text-[var(--alembic-black)] xl:text-[24px] md:text-[21px] text-[18px] font-semibold p-0">
