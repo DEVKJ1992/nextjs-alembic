@@ -89,7 +89,7 @@ export default async function JobsPage() {
 	const jobs: Job[] = await getJobs();
 	const data = await getData(`*[_type == "careersPage"][0]`, "Careers Page");
 	return (
-		<div className="xl:p-10 lg:p-10 md:p-8 p-5 max-w-[1280px] m-auto">
+		<div className="xl:p-10 p-5 max-w-[1280px] m-auto">
 			<h1 className="mb-6 mt-4">{data?.pageTitle}</h1>
 			<div className="max-w-[575px] ml-auto text-[var(--alembic-black)] text-[16px]">
 				<PortableText value={data?.body} />
@@ -161,7 +161,7 @@ export default async function JobsPage() {
 			</div>
 
 			<div className="py-10">
-				<div className="max-w-[1220px]  mx-auto">
+				<div className="max-w-[1220px] mx-auto">
 					<h2 className="color-[var(--alembic-black)] text-[48px] font-medium">
 						Featured news and press
 					</h2>

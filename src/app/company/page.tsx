@@ -51,14 +51,14 @@ export default async function CompanyPage() {
 
 	return (
 		<div className="Company-parent">
-			<div className="xl:p-10 lg:p-10 md:p-8 p-5 max-w-[1280px] m-auto">
+			<div className="xl:p-10 p-5 max-w-[1280px] m-auto">
 				<h1 className="mb-6 mt-4">{data?.pageTitle}</h1>
 				<div className="max-w-[575px] ml-auto text-[var(--alembic-black)] text-[16px]">
 					<PortableText value={data?.body} />
 				</div>
 			</div>
 			<div className="company_grid bg-[#F5FAFF] py-20">
-				<div className=" xl:px-0 px-5  max-w-[1280px]  mx-auto">
+				<div className="xl:px-10 px-5 max-w-[1280px]  mx-auto">
 					<div className="border-b-2 border-[var(--alembic-black)]">
 						<h2 className="font-semibold xl:text-[92px] lg:text-[80px] md:text-[60px] xl:leading-[96px] lg:leading-[96px] md:leading-[60px]">
 							{data?.valuesTitle}
@@ -90,7 +90,7 @@ export default async function CompanyPage() {
 				</div>
 			</div>
 			<div className="py-20">
-				<div className="bg-[var(--alembic-purple)] p-10 max-w-[1220px]  mx-auto">
+				<div className="bg-[var(--alembic-purple)] xl:p-10 p-5 max-w-[1220px] mx-auto">
 					<h3 className="text-[#fff] lg:text-[64px] lg:leading-[70px] font-normal">
 						{data?.ctaTitle}
 					</h3>
@@ -134,7 +134,7 @@ export default async function CompanyPage() {
 					</div>
 				</div>
 			</div>
-			<div className="py-10 px-8">
+			<div className="py-10 xl:px-10 px-5">
 				<div className="max-w-[1220px]  mx-auto">
 					<h3 className="color-[var(--alembic-black)] text-[48px] font-medium">
 						Featured news and press
