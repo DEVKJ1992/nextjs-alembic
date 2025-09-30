@@ -51,12 +51,10 @@ export default async function CompanyPage() {
 
 	return (
 		<div className="Company-parent">
-			<div className="text-section bg-[#FFF] py-20 max-w-[1280px]  mx-auto">
-				<div className="md:pb-20 pb-0 px-5">
-					<h1>{data?.pageTitle}</h1>
-					<div className="max-w-[570px] my-5 ml-auto">
-						<PortableText value={data?.body} />
-					</div>
+			<div className="xl:p-10 lg:p-10 md:p-8 p-5 max-w-[1280px] m-auto">
+				<h1 className="mb-6">{data?.pageTitle}</h1>
+				<div className="max-w-[575px] ml-auto text-[var(--alembic-black)] text-[16px]">
+					<PortableText value={data?.body} />
 				</div>
 			</div>
 			<div className="company_grid bg-[#F5FAFF] py-20">
