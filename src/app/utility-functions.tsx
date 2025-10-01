@@ -5,6 +5,7 @@ import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import { PortableTextBlock } from "@portabletext/types";
 import { type SanityDocument } from "next-sanity";
+import { PortableTextComponents } from "@portabletext/react";
 
 const { projectId, dataset } = client.config();
 export const urlFor = (source: SanityImageSource) =>
@@ -190,7 +191,21 @@ export async function getData(
 	}
 }
 
-export const components = {
+export const components: PortableTextComponents = {
+	marks: {
+		link: ({ children, value }) => {
+			const { href, blank } = value;
+			return blank ? (
+				<a href={href} target="_blank" rel="noopener">
+					{children}
+				</a>
+			) : (
+				<a href={href} target="_self">
+					{children}
+				</a>
+			);
+		},
+	},
 	types: {
 		image: ImageComponent,
 		iframe: IframeEmbedComponent,
