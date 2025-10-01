@@ -50,11 +50,11 @@ const nextConfig: NextConfig = {
 						key: "Content-Security-Policy",
 						value: `
 							default-src 'self';
-							script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://*.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com;
+							script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://*.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://app.termly.io https://challenges.cloudflare.com https://www.google-analytics.com https://snap.licdn.com;
 							style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-							img-src 'self' data: blob: https://cdn.sanity.io https://*.shopifycdn.com https://i.ytimg.com;
+							img-src 'self' data: blob: https://cdn.sanity.io https://*.shopifycdn.com https://i.ytimg.com https://px.ads.linkedin.com;;
 							font-src 'self' https://fonts.gstatic.com;
-							connect-src 'self' https://cdn.sanity.io https://*.ingest.sentry.io;
+							connect-src 'self' https://cdn.sanity.io https://*.ingest.sentry.io https://analytics.google.com https://www.google-analytics.com;
 							frame-src https://www.youtube.com https://www.youtube-nocookie.com;
 							frame-ancestors 'none';
 							object-src 'none';
