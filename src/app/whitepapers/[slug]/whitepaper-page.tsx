@@ -77,6 +77,8 @@ export default function WhitepaperPage({
 				}),
 			});
 
+			const data = await response.json();
+
 			if (response.ok) {
 				setIsSubmitted(true);
 				setFormData({
@@ -96,6 +98,7 @@ export default function WhitepaperPage({
 				});
 			} else {
 				setMessage("Something went wrong. Please try again.");
+				console.error(data.message);
 			}
 		} catch (error) {
 			setMessage("An error occurred. Please try again.");

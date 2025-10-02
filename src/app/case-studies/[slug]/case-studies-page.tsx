@@ -76,6 +76,8 @@ export default function CaseStudiesPage({
 				}),
 			});
 
+			const data = await response.json();
+
 			if (response.ok) {
 				setIsSubmitted(true);
 				setFormData({
@@ -93,7 +95,10 @@ export default function CaseStudiesPage({
 						: "",
 				});
 			} else {
-				setMessage("Something went wrong. Please try again.");
+				setMessage(
+					"Something went wrong. Please refresh page and try again."
+				);
+				console.error(data.message);
 			}
 		} catch (error) {
 			setMessage("An error occurred. Please try again.");
@@ -257,10 +262,16 @@ export default function CaseStudiesPage({
 											aria-label="How did you hear about Alembic?"
 											className="border-[#D0D5DD80] border-2 p-2 bg-white w-full"
 										>
-											<option value="Social Media">Social Media</option>
-											<option value="Online Search">Online Search</option>
+											<option value="Social Media">
+												Social Media
+											</option>
+											<option value="Online Search">
+												Online Search
+											</option>
 											<option value="Ad">Ad</option>
-											<option value="Friend">Friend</option>
+											<option value="Friend">
+												Friend
+											</option>
 										</select>
 									</div>
 								</div>
@@ -268,7 +279,9 @@ export default function CaseStudiesPage({
 								<input
 									type="hidden"
 									name="pageTitle"
-									value={whitepaper.eyebrowTitle ?? "Case-Study"}
+									value={
+										whitepaper.eyebrowTitle ?? "Case-Study"
+									}
 								/>
 								<input
 									type="hidden"
@@ -292,7 +305,9 @@ export default function CaseStudiesPage({
 									disabled={isSubmitting}
 									className="btn-al btn-primary mt-8"
 								>
-									{isSubmitting ? "Submitting..." : "SUBMIT >"}
+									{isSubmitting
+										? "Submitting..."
+										: "SUBMIT >"}
 								</button>
 							</>
 						)}

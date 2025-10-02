@@ -88,6 +88,8 @@ export default function TalkForm({ data }: Props) {
 				}),
 			});
 
+			const data = await response.json();
+
 			if (response.ok) {
 				setFormData({
 					firstName: "",
@@ -104,6 +106,7 @@ export default function TalkForm({ data }: Props) {
 				window.location.href = "/thank-you";
 			} else {
 				setMessage("Something went wrong. Please try again.");
+				console.error(data.message);
 			}
 		} catch (error) {
 			setMessage("An error occurred. Please try again.");

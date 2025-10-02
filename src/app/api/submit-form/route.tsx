@@ -160,9 +160,10 @@ export async function POST(request: Request) {
 			await transporter.sendMail(mailOptions);
 			await transporter.sendMail(adminMailOptions);
 		} else if (contactFormType !== "Subscribe") {
-			return NextResponse.json({
-				message: "Error sending email, Please try again!",
-			});
+			return NextResponse.json(
+				{ message: "Error sending email, Please try again!" },
+				{ status: 500 }
+			);
 		}
 
 		const submission = {
@@ -185,17 +186,17 @@ export async function POST(request: Request) {
 			const slackWebhookUrl = process.env.SLACK_WEBHOOK || "";
 
 			const slackMessage = `New contact form submission:
-		*First Name:* ${firstName}
-		*Last Name:* ${lastName}
-		*Email:* ${email}
-		*Company Name:* ${companyName}
-		*Phone:* ${phone}
-		*Country:* ${country}
-		*How did you hear about Alembic:* ${how}
-		*Page Title:* ${pageTitle}
-		*Contact Form Type:* ${contactFormType}
-		*Timestamp:* ${new Date().toISOString()}
-		`;
+				*First Name:* ${firstName}
+				*Last Name:* ${lastName}
+				*Email:* ${email}
+				*Company Name:* ${companyName}
+				*Phone:* ${phone}
+				*Country:* ${country}
+				*How did you hear about Alembic:* ${how}
+				*Page Title:* ${pageTitle}
+				*Contact Form Type:* ${contactFormType}
+				*Timestamp:* ${new Date().toISOString()}
+			`;
 
 			try {
 				const response = await fetch(slackWebhookUrl, {
@@ -207,18 +208,24 @@ export async function POST(request: Request) {
 				});
 
 				if (!response.ok) {
-					return console.error("Failed to send message to Slack");
+					const errorText = await response.text();
+					console.error("Failed to send message to Slack", {
+						status: response.status,
+						statusText: response.statusText,
+						body: errorText,
+					});
 				}
 
 				console.log("Message sent to Slack successfully!");
 			} catch (error) {
-				console.error(error);
+				console.error("Slack Error: " + error);
 			}
 		}
 
-		return NextResponse.json({
-			message: "Emails sent and data saved to Sanity successfully!",
-		});
+		return NextResponse.json(
+			{ message: "Emails sent and data saved to Sanity successfully!" },
+			{ status: 200 }
+		);
 	} catch (error) {
 		console.error("Error sending message:", JSON.stringify(error));
 
