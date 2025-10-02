@@ -97,10 +97,17 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<head>
-				<Script
+				{/* <Script
 					type="text/javascript"
 					src="https://app.termly.io/resource-blocker/0c48e1cf-a40f-4c4b-924e-2e8dde4a1b1b?autoBlock=on"
-				></Script>
+				></Script> */}
+				<Suspense fallback={<div>Loading...</div>}>
+					<TermlyCMP
+						autoBlock={true}
+						masterConsentsOrigin="https://getalembic.com"
+						websiteUUID={WEBSITE_UUID}
+					/>
+				</Suspense>
 				{/* Google Analytics */}
 				<Script
 					strategy="afterInteractive"
@@ -131,13 +138,6 @@ export default async function RootLayout({
 			<body
 				className={`${architekt.variable} ${chivoMono.variable} ${inter.variable} antialiased`}
 			>
-				<Suspense fallback={<div>Loading...</div>}>
-					<TermlyCMP
-						autoBlock={true}
-						masterConsentsOrigin="https://getalembic.com"
-						websiteUUID={WEBSITE_UUID}
-					/>
-				</Suspense>
 				{/* Google Tag Manager (noscript) */}
 				<noscript>
 					<iframe
