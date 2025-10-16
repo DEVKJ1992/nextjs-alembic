@@ -16,17 +16,27 @@ const PRESS_QUERY = `*[
   _type == "press" && !(_id in path("drafts.**"))
 ]|order(publishedAt desc){_id, title, publishedAt, cta}`;
 
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 const POSTS_PER_PAGE = 5;
 
 const query = `*[_type == "newsPage"][0]{_id, seo}`;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string }>;
+}): Promise<Metadata> {
+	const pageParam = (await searchParams).page
+		? Number((await searchParams).page)
+		: 1;
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const canonicalUrl = `${SITE_URL}/news`;
+		const canonicalUrl =
+			pageParam > 1
+				? `${SITE_URL}/news?page=${pageParam}`
+				: `${SITE_URL}/news`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
@@ -38,6 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			openGraph: {
 				title: page.seo?.metaTitle + " | Alembic",
 				description: page.seo?.metaDescription,
+				url: canonicalUrl,
 			},
 			twitter: {
 				title: page.seo?.metaTitle + " | Alembic",
@@ -56,11 +67,12 @@ export async function generateMetadata(): Promise<Metadata> {
 	}
 }
 
-export default async function NewsIndexPage(props: {
+export default async function NewsIndexPage({
+	searchParams,
+}: {
 	searchParams: Promise<{ page?: string }>;
 }) {
-	const searchParams = await props.searchParams;
-	const currentPage = Number(searchParams?.page) || 1;
+	const currentPage = Number((await searchParams).page) || 1;
 	const start = (currentPage - 1) * POSTS_PER_PAGE;
 	const end = start + POSTS_PER_PAGE;
 	const data = await getData(

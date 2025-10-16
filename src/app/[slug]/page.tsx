@@ -6,9 +6,10 @@ import { urlFor, components, getData } from "../utility-functions";
 import Image from "next/image";
 import FooterSection from "../template-parts/footer-section";
 import { SITE_URL } from "../constants/site";
+import { notFound } from "next/navigation";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata({
 	params,
@@ -56,6 +57,10 @@ export default async function PostPage({
 		await params,
 		isDraftMode
 	);
+
+	if (!post) {
+		notFound();
+	}
 
 	const postImageUrl = post?.image
 		? urlFor(post?.image)?.fit("max").url()

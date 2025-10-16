@@ -16,17 +16,28 @@ const POSTS_QUERY = `*[
   && defined(slug.current) && !(_id in path("drafts.**"))
 ]|order(publishedAt desc)[$start...$end]{_id, title, slug, image, publishedAt, author, category}`;
 
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 const POSTS_PER_PAGE = 10;
 
 const query = `*[_type == "blogPage"][0]{_id, seo}`;
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string }>;
+}): Promise<Metadata> {
+	const pageParam = (await searchParams).page
+		? Number((await searchParams).page)
+		: 1;
+
 	let page: SanityDocument | null = null;
 
 	try {
 		page = await client.fetch<SanityDocument>(query, {}, options);
-		const canonicalUrl = `${SITE_URL}/blog`;
+		const canonicalUrl =
+			pageParam > 1
+				? `${SITE_URL}/blog?page=${pageParam}`
+				: `${SITE_URL}/blog`;
 		return {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
@@ -38,6 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			openGraph: {
 				title: page.seo?.metaTitle + " | Alembic",
 				description: page.seo?.metaDescription,
+				url: canonicalUrl,
 			},
 			twitter: {
 				title: page.seo?.metaTitle + " | Alembic",
@@ -56,13 +68,15 @@ export async function generateMetadata(): Promise<Metadata> {
 	}
 }
 
-export default async function PostIndexPage(props: {
+export default async function PostIndexPage({
+	searchParams,
+}: {
 	searchParams: Promise<{ page?: string }>;
 }) {
-	const searchParams = await props.searchParams;
-	const currentPage = Number(searchParams?.page) || 1;
+	const currentPage = Number((await searchParams).page) || 1;
 	const start = (currentPage - 1) * POSTS_PER_PAGE;
 	const end = start + POSTS_PER_PAGE;
+
 	const data = await getData(`*[_type == "blogPage"][0]`, "Blog Page");
 	const posts = await client.fetch<SanityDocument[]>(
 		POSTS_QUERY,

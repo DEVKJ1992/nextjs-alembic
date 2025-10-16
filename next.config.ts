@@ -52,6 +52,7 @@ const nextConfig: NextConfig = {
 							default-src 'self';
 							script-src 'self' 'unsafe-inline' 'unsafe-eval'
 								https://cdn.sanity.io
+								https://www.google.com
 								https://*.googletagmanager.com
 								https://www.youtube.com
 								https://www.youtube-nocookie.com
@@ -60,15 +61,20 @@ const nextConfig: NextConfig = {
 								https://www.google-analytics.com
 								https://snap.licdn.com;
 							style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+							style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
 							img-src 'self' data: blob:
 								https://cdn.sanity.io
 								https://*.shopifycdn.com
 								https://i.ytimg.com
-								https://px.ads.linkedin.com;
+								https://www.linkedin.com
+								https://px.ads.linkedin.com
+								https://www.googletagmanager.com
+								https://www.google-analytics.com;
 							font-src 'self' https://fonts.gstatic.com;
 							connect-src 'self'
 								https://cdn.sanity.io
 								https://*.ingest.sentry.io
+								https://www.google.com/
 								https://analytics.google.com
 								https://www.google-analytics.com
 								https://app.termly.io
