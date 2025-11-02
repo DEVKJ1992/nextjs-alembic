@@ -63,7 +63,7 @@ export default async function AILab() {
 			/>
 			{/* Banner Section */}
 
-			<div className="max-w-[1220px] mx-auto py-16 xl:px-0 px-5">
+			<div className="max-w-[1220px] mx-auto py-16 xl:px-0 px-5 mt-20">
 				<h2 className="text-center xl:text-[96px] lg:text-[80px] md:text-[60px] text-[40px] text-[var(--alembic-black)] xl:leading-[92px] lg:leading-[92px] font-semibold md:leading-[60px] leading-[45px] z-10 relative">
 					{data?.titleWithText2?.title}
 				</h2>
