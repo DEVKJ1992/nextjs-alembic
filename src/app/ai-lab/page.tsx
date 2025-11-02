@@ -208,12 +208,12 @@ export default async function AILab() {
 				</Link>
 				<p className="text-large-alt mt-10">
 					Learn about the history of Alembic,{" "}
-					<a
+					<Link
 						href="/created-in-california"
 						className="text-[var(--alembic-black)]"
 					>
 						Created in California
-					</a>
+					</Link>
 				</p>
 			</div>
 		</div>
