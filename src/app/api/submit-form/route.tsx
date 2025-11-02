@@ -12,6 +12,7 @@ interface FormData {
 	phone: string;
 	country: string;
 	how: string;
+	howOther: string;
 	contactFormType: string;
 	url?: string;
 	pageTitle: string;
@@ -53,6 +54,7 @@ export async function POST(request: Request) {
 		phone,
 		country,
 		how,
+		howOther,
 		contactFormType,
 		url,
 		pageTitle,
@@ -152,6 +154,7 @@ export async function POST(request: Request) {
 				Country: ${country}\n
 				Phone: ${phone}\n
 				How Did You Hear About Us: ${how}\n
+				How Did You Hear About Us (Other): ${how == "Other" ? howOther : ""}\n
 				Page Title: ${pageTitle}\n\n
 				Best regards,\nThe Alembic Team`,
 		};
@@ -175,6 +178,7 @@ export async function POST(request: Request) {
 			phone,
 			country,
 			how,
+			howOther,
 			contactFormType,
 			pageTitle,
 			timestamp: new Date().toISOString(),
@@ -193,6 +197,7 @@ export async function POST(request: Request) {
 				*Phone:* ${phone}
 				*Country:* ${country}
 				*How did you hear about Alembic:* ${how}
+				*How did you hear about Alembic (Other):* ${how == "Other" ? howOther : ""}
 				*Page Title:* ${pageTitle}
 				*Contact Form Type:* ${contactFormType}
 				*Timestamp:* ${new Date().toISOString()}

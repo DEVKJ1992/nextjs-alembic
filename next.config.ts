@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
 								https://www.google-analytics.com
 								https://snap.licdn.com;
 							style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-							style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
+							style-src-elem 'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com;
 							img-src 'self' data: blob:
 								https://cdn.sanity.io
 								https://*.shopifycdn.com
@@ -98,68 +98,78 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
-				source: "/book-a-demo/",
-				destination: "/book-a-consultation/",
+				source: "/book-a-demo",
+				destination: "/book-a-consultation",
 				permanent: true,
 			},
 			{
-				source: "/predictive-data-visualization-software-platform/",
-				destination: "/platform/",
+				source: "/predictive-data-visualization-software-platform",
+				destination: "/platform",
 				permanent: true,
 			},
 			{
-				source: "/data-visualization-platform-alembic/",
-				destination: "/methodology/",
+				source: "/solutions",
+				destination: "/platform",
 				permanent: true,
 			},
 			{
-				source: "/data-integration-visualization-whitepapers/whitepaper-number-2/",
-				destination: "/case-studies/higher-ed/",
+				source: "/data-visualization-platform-alembic",
+				destination: "/methodology",
 				permanent: true,
 			},
 			{
-				source: "/data-integration-visualization-whitepapers/whitepaper-number-3/",
-				destination: "/case-studies/b2b/",
+				source: "/data-integration-visualization-whitepapers/whitepaper-number-2",
+				destination: "/case-studies/higher-ed",
 				permanent: true,
 			},
 			{
-				source: "/whitepaper-number-1/",
-				destination: "/case-studies/sporting-goods/",
+				source: "/data-integration-visualization-whitepapers/whitepaper-number-3",
+				destination: "/case-studies/b2b",
 				permanent: true,
 			},
 			{
-				source: "/data-integration-visualization-whitepapers/",
-				destination: "/whitepapers/gartner/",
+				source: "/whitepaper-number-1",
+				destination: "/case-studies/sporting-goods",
 				permanent: true,
 			},
 			{
-				source: "/about-alembic-data-analytics-tool/",
-				destination: "/company/",
+				source: "/data-integration-visualization-whitepapers",
+				destination: "/whitepapers/gartner",
 				permanent: true,
 			},
 			{
-				source: "/contact-data-analytics-company/",
-				destination: "/contact/",
+				source: "/about-alembic-data-analytics-tool",
+				destination: "/company",
 				permanent: true,
 			},
 			{
-				source: "/ai-marketing-data-visualization-tool/",
-				destination: "/solutions/marketing/",
+				source: "/contact-data-analytics-company",
+				destination: "/contact",
 				permanent: true,
 			},
 			{
-				source: "/industries/",
-				destination: "/solutions/industries/",
+				source: "/ai-marketing-data-visualization-tool",
+				destination: "/platform",
 				permanent: true,
 			},
 			{
-				source: "/terms-of-service/",
-				destination: "/terms/",
+				source: "/industries",
+				destination: "/platform",
 				permanent: true,
 			},
 			{
-				source: "/responsible-disclosure/",
-				destination: "/security/",
+				source: "/terms-of-service",
+				destination: "/terms",
+				permanent: true,
+			},
+			{
+				source: "/responsible-disclosure",
+				destination: "/security",
+				permanent: true,
+			},
+			{
+				source: "/soc-3-compliance",
+				destination: "/soc-3",
 				permanent: true,
 			},
 		];

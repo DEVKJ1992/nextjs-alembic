@@ -42,7 +42,8 @@ export default function TalkForm({ data }: Props) {
 		companyName: "",
 		phone: "",
 		country: "US",
-		how: "Social Media",
+		how: "",
+		howOther: "",
 		pageTitle: "Talk To Sales",
 		contactFormType: "Talk-To-Sales",
 		turnstileToken: "",
@@ -98,7 +99,8 @@ export default function TalkForm({ data }: Props) {
 					email: "",
 					phone: "",
 					country: "US",
-					how: "Social Media",
+					how: "",
+					howOther: "",
 					pageTitle: "Talk To Sales",
 					contactFormType: "Talk-To-Sales",
 					turnstileToken: "",
@@ -245,16 +247,58 @@ export default function TalkForm({ data }: Props) {
 										onChange={handleChange}
 										aria-label="How did you hear about Alembic?"
 										className="border-[#D0D5DD80] border-2 p-2 bg-white w-full"
+										required
 									>
+										<option value="">
+											-- Please select one --
+										</option>
 										<option value="Social Media">
-											Social Media
+											Social Media (LinkedIn, X, etc.)
 										</option>
 										<option value="Online Search">
-											Online Search
+											Online Search (Google, Bing, etc.)
 										</option>
-										<option value="Ad">Ad</option>
-										<option value="Friend">Friend</option>
+										<option value="Conference or Event">
+											Conference or Event
+										</option>
+										<option value="Partner or Agency Referral">
+											Partner or Agency Referral
+										</option>
+										<option value="Friend / Colleague">
+											Friend / Colleague
+										</option>
+										<option value="Alembic Website or Newsletter">
+											Alembic Website or Newsletter
+										</option>
+										<option value="Sponsored Content">
+											Sponsored Content (Forbes, Adweek,
+											etc.)
+										</option>
+										<option value="Customer Referral">
+											Customer Referral
+										</option>
+										<option value="Other">
+											Other (please specify)
+										</option>
 									</select>
+
+									{/* Conditionally render input if 'Other' selected */}
+									{formData.how === "Other" && (
+										<input
+											type="text"
+											name="howOther"
+											value={formData.howOther ?? ""}
+											onChange={(e) =>
+												setFormData((prev) => ({
+													...prev,
+													howOther: e.target.value,
+												}))
+											}
+											placeholder="Please specify here"
+											className="border-[#D0D5DD80] border-2 p-2 focus:border-indigo-500 focus:ring-indigo-500"
+											required
+										/>
+									)}
 								</div>
 							</div>
 							<div

@@ -103,7 +103,7 @@ export default async function IndexPage() {
 
 			{/* alembic testimonial */}
 			<div
-				className="data-operation py-20 bg-[right_center] bg-no-repeat bg-auto"
+				className={`data-operation py-20 bg-[right_center] bg-no-repeat bg-cover ${home?.testimonial?.solidBackground ? "force-mobile-bg" : ""}`}
 				style={{
 					backgroundImage:
 						"url(" +
@@ -162,7 +162,7 @@ export default async function IndexPage() {
 
 			{/* second banner section */}
 			<div
-				className="second-banner-bg min-h-screen bg-center bg-no-repeat bg-cover"
+				className={`second-banner-bg min-h-screen bg-center bg-no-repeat bg-cover ${home?.titleText?.solidBackground ? "force-mobile-bg" : ""}`}
 				style={{
 					backgroundImage:
 						"url(" +

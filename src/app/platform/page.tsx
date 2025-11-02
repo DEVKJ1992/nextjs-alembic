@@ -13,7 +13,7 @@ import Button from "../components/Button";
 import { SITE_URL } from "../constants/site";
 
 const query = `*[_type == "platformPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;
@@ -108,7 +108,7 @@ export default async function PlatformIndexPage() {
 			</div>
 
 			<div
-				className="pt-20 pb-40 banner-bg bg-center bg-no-repeat bg-cover"
+				className={`pt-20 pb-40 banner-bg bg-center bg-no-repeat bg-cover ${data?.titleText?.solidBackground ? "force-mobile-bg" : ""}`}
 				style={{
 					backgroundImage:
 						"url(" +

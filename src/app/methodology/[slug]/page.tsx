@@ -5,7 +5,7 @@ import FooterSection from "../../template-parts/footer-section";
 import { client } from "@/sanity/client";
 
 const query = `*[_type == "basicPages" && slug.current == $slug][0]`;
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata({
 	params,

@@ -10,7 +10,7 @@ function isMobileDevice(userAgent: string): boolean {
 	);
 }
 
-export async function Banner(props: {
+export async function Banner2(props: {
 	data: SanityDocument;
 	bannerVideo: string;
 }) {
@@ -58,32 +58,39 @@ export async function Banner(props: {
 
 			{/* Content */}
 			{props?.data && (
-				<div className="banner max-w-[1220px] mx-auto py-36 xl:px-0 px-5 relative z-10">
-					<div className="col max-w-[900px]">
+				<div className="banner banner2 max-w-[1220px] mx-auto py-36 xl:px-0 px-5 relative z-10">
+					<div className="col max-w-[1000px]">
 						<h1>{props.data.title}</h1>
-						<div className="max-w-[600px] my-8">
-							<PortableText value={props.data.body} />
-						</div>
-						<div className="btn-col max-w-[700px] flex md:flex-row flex-col flex-wrap gap-3">
-							{props.data.cta1Text && (
-								<Button
-									href={props.data.cta1Url}
-									variant="secondary"
-									className="w-full md:w-max flex-1"
-									noIcon
-								>
-									{props.data.cta1Text}
-								</Button>
-							)}
-							{props.data.cta2Text && (
-								<Button
-									href={props.data.cta2Url}
-									variant="primary"
-									className="flex-1"
-								>
-									{props.data.cta2Text}
-								</Button>
-							)}
+						<div
+							className={`max-w-[800px] ${props.data.contentBackground ? "bg-white px-10 pb-10" : ""}`}
+						>
+							<div className="max-w-[700px] my-8">
+								<h2 className="pt-10">{props.data.subtitle}</h2>
+								<div className="max-w-[600px]">
+									<PortableText value={props.data.body} />
+								</div>
+							</div>
+							<div className="btn-col max-w-[700px] flex md:flex-row flex-col flex-wrap gap-3">
+								{props.data.cta1Text && (
+									<Button
+										href={props.data.cta1Url}
+										variant="primary"
+										className="max-w-[400px] flex-1"
+										noIcon
+									>
+										{props.data.cta1Text + " >"}
+									</Button>
+								)}
+								{props.data.cta2Text && (
+									<Button
+										href={props.data.cta2Url}
+										variant="secondary"
+										className="flex-1"
+									>
+										{props.data.cta2Text}
+									</Button>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

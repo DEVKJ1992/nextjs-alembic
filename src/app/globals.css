@@ -32,7 +32,8 @@ body {
 	font-family: var(--font-inter), Helvetica, sans-serif;
 }
 
-h1 {
+h1,
+.h1 {
 	color: var(--alembic-black);
 	font-size: 96px;
 	font-weight: 600;
@@ -42,12 +43,19 @@ h1 {
 }
 
 h2 {
-	color: #000;
+	color: var(--alembic-black);
 	font-size: 64px;
 	font-weight: 400;
 	line-height: 65px;
 	padding: 20px 0;
 	letter-spacing: -2px;
+}
+
+.banner2 h2 {
+	font-size: 32px;
+	line-height: 34px;
+	letter-spacing: -1px;
+	font-weight: 600;
 }
 
 h3 {
@@ -72,6 +80,14 @@ li {
 
 .text-large {
 	color: var(--alembic-black);
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 32px;
+	letter-spacing: -0.4px;
+}
+
+.text-large-alt {
+	color: #fff;
 	font-size: 24px;
 	font-weight: 500;
 	line-height: 32px;
@@ -165,6 +181,16 @@ nav a:hover {
 	z-index: 99;
 }
 
+.alt-section p {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.alt-section ul {
+	margin-top: 0 !important;
+	padding-top: 0;
+}
+
 .responsive-video {
 	object-position: 60% 50%; /* Default for mobile */
 }
@@ -183,7 +209,8 @@ nav a:hover {
 	}
 }
 @media (max-width: 768px) {
-	h1 {
+	h1,
+	.h1 {
 		font-size: 48px;
 		line-height: 50px;
 		letter-spacing: -2px;
@@ -202,6 +229,10 @@ nav a:hover {
 		font-size: 24px;
 		line-height: 32px;
 		letter-spacing: -0.4px;
+	}
+	.force-mobile-bg {
+		background-image: unset !important;
+		background-color: var(--alembic-gray) !important;
 	}
 }
 @media screen and (max-width: 500px) {

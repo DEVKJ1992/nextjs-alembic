@@ -1,0 +1,90 @@
+
+---
+name: Corp Production Deploy to Alembic Server
+on:
+  push:
+    branches:
+      - main
+jobs:
+ deploy_corp:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Use node_modules cache
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install --include=dev
+
+      - name: Install SSH key of bastion
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.CORP_ALEMBIC_PRIVATE_KEY }}
+          name: id_rsa-bastion
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          config: |
+            Host bastion
+            HostName bastion.corp.getalembic.com
+            Port 22475
+            User corpdeploy
+            IdentityFile ~/.ssh/id_rsa-bastion
+
+      - name: Install alembic user private key for deploy target
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.CORP_ALEMBIC_PRIVATE_KEY }}
+          name: id_rsa-target
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }} # will be appended to existing .ssh/known_hosts
+          config: |                                   # will be appended to existing .ssh/config
+            Host *.corp.dc1.alb
+            User corpdeploy
+            IdentityFile ~/.ssh/id_rsa-target
+            ForwardAgent yes
+            ProxyCommand ssh -W %h:%p bastion
+
+      - name: Install Deployment Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SIGHTBOX_ALEMBIC_DEPLOY_KEY }}
+          name: id_www_deploy
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Prep Agent
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add ~/.ssh/id_www_deploy
+          ssh-add ~/.ssh/id_rsa-target
+
+# uncomment to enable tmate and have a place to ssh into.
+#      - name: Setup tmate session
+#        uses: mxschmitt/action-tmate@v3
+#        with:
+#          limit-access-to-actor: true
+
+      - name: Deploy
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ./node_modules/.bin/pm2 deploy ecosystem.config.js production
+

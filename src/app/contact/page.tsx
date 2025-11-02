@@ -7,7 +7,7 @@ import { getData } from "../utility-functions";
 import { PortableTextBlock } from "sanity";
 
 const query = `*[_type == "contactPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;

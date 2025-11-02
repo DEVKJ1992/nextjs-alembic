@@ -12,7 +12,7 @@ import { SITE_URL } from "../constants/site";
 import ContentImage from "../template-parts/content-image";
 
 const query = `*[_type == "californiaPage"][0]{_id, seo}`;
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata(): Promise<Metadata> {
 	let page: SanityDocument | null = null;

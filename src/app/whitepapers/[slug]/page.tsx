@@ -6,7 +6,7 @@ import { SITE_URL } from "../../constants/site";
 
 const POST_QUERY = `*[_type == "whitepaper" && type == "Whitepaper" && slug.current == $slug][0]{_id, title, eyebrowTitle, shortTitle, description, slug, metaImage, metaTitle, metaDescription, url, "whitepaperURL": uploadWhitepaper.asset->url}`;
 
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 86400 } };
 
 export async function generateMetadata({
 	params,

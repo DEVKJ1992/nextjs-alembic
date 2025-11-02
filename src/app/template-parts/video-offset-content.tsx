@@ -22,39 +22,43 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 				width={1220}
 				height={682}
 			></Image>
-			<Link
-				onClick={openModal}
-				href="javascript:void(0)"
-				className="w-[105] flex justify-center items-center absolute top-[10vw]"
-			>
-				<span>
-					<Image
-						src="/images/icon-play.svg"
-						alt=""
-						width={105}
-						height={105}
-					></Image>
-				</span>
-			</Link>
+			{props?.data?.youtubeUrl && (
+				<Link
+					onClick={openModal}
+					href="#"
+					className="w-[105] flex justify-center items-center absolute top-[10vw]"
+				>
+					<span>
+						<Image
+							src="/images/icon-play.svg"
+							alt=""
+							width={105}
+							height={105}
+						></Image>
+					</span>
+				</Link>
+			)}
 
-			<Modal
-				isOpen={isOpen}
-				onRequestClose={closeModal}
-				contentLabel="YouTube Video Modal"
-				className="modal"
-				overlayClassName="overlay"
-				ariaHideApp={false}
-			>
-				<div className="relative w-full h-0 pb-[56.25%]">
-					<iframe
-						src={props?.data?.youtubeUrl}
-						title="YouTube Video"
-						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-						allowFullScreen
-						className="absolute top-0 left-0 w-full h-full"
-					></iframe>
-				</div>
-			</Modal>
+			{props?.data?.youtubeUrl && (
+				<Modal
+					isOpen={isOpen}
+					onRequestClose={closeModal}
+					contentLabel="YouTube Video Modal"
+					className="modal"
+					overlayClassName="overlay"
+					ariaHideApp={false}
+				>
+					<div className="relative w-full h-0 pb-[56.25%]">
+						<iframe
+							src={props?.data?.youtubeUrl}
+							title="YouTube Video"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen
+							className="absolute top-0 left-0 w-full h-full"
+						></iframe>
+					</div>
+				</Modal>
+			)}
 
 			<div className="txt-head max-w-[966px] mx-auto bg-white p-10 md:mt-[-320px] mt-0 z-10 relative">
 				<h3
@@ -63,7 +67,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 					{props?.data?.sectionTitle}
 				</h3>
 				{props?.data?.style === "Style 1" ? (
-					<div className="flex flex-wrap gap-3 justify-between mt-5">
+					<div className="flex flex-wrap gap-3 justify-between mt-10">
 						{props?.data?.body?.map(
 							(item: SanityDocument) =>
 								item && (
@@ -81,19 +85,20 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 									</div>
 								)
 						)}
-
-						<div className="w-[100%] flex flex-col">
-							<Button
-								href={props?.data?.ctaUrl}
-								variant="primary"
-								className="ml-auto"
-							>
-								{props?.data?.ctaText}
-							</Button>
-						</div>
+						{props?.data?.ctaText && (
+							<div className="w-[100%] flex flex-col">
+								<Button
+									href={props?.data?.ctaUrl}
+									variant="primary"
+									className="ml-auto"
+								>
+									{props?.data?.ctaText}
+								</Button>
+							</div>
+						)}
 					</div>
 				) : (
-					<div className="flex flex-wrap gap-3 justify-between mt-5">
+					<div className="flex flex-wrap gap-3 justify-between mt-10">
 						{props?.data?.body?.map(
 							(item: SanityDocument) =>
 								item && (
@@ -124,15 +129,17 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 								)
 						)}
 
-						<div className="w-[100%] flex flex-col">
-							<Button
-								href={props?.data?.ctaUrl}
-								variant="primary"
-								className="mt-6"
-							>
-								{props?.data?.ctaText}
-							</Button>
-						</div>
+						{props?.data?.ctaText && (
+							<div className="w-[100%] flex flex-col">
+								<Button
+									href={props?.data?.ctaUrl}
+									variant="primary"
+									className="mt-6"
+								>
+									{props?.data?.ctaText}
+								</Button>
+							</div>
+						)}
 					</div>
 				)}
 			</div>
@@ -156,7 +163,7 @@ export function VideoOffsetContentMethodology() {
 			></Image>
 			<Link
 				onClick={openModal}
-				href="javascript:void(0)"
+				href="#"
 				className="w-[105] flex justify-center items-center absolute top-[10vw]"
 			>
 				<span>
