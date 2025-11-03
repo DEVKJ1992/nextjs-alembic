@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export async function AlternatingSection(props: { data: SanityDocument }) {
 	return (
-		<div className="bg-[#F5FAFF] mt-20 py-20 md:px-0 px-5 -mb-40">
+		<div className="bg-[#F5FAFF] mt-20 py-20 lg:px-0 px-5 -mb-40">
 			<div className="alt-section max-w-[1220px] m-auto">
 				<h1
 					className="h1 text-center"
