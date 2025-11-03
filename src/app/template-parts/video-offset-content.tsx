@@ -66,6 +66,14 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 				>
 					{props?.data?.sectionTitle}
 				</h3>
+				{props?.data?.subtitle && (
+					<p
+						className="text-center"
+						dangerouslySetInnerHTML={{
+							__html: props?.data?.subtitle || "",
+						}}
+					/>
+				)}
 				{props?.data?.style === "Style 1" ? (
 					<div className="flex flex-wrap gap-3 justify-between mt-10">
 						{props?.data?.body?.map(

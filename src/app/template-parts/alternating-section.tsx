@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export async function AlternatingSection(props: { data: SanityDocument }) {
 	return (
-		<div className="bg-[#F5FAFF] mt-20 py-20 -mb-40">
+		<div className="bg-[#F5FAFF] mt-20 py-20 md:px-0 px-5 -mb-40">
 			<div className="alt-section max-w-[1220px] m-auto">
 				<h1
 					className="h1 text-center"
@@ -14,6 +14,14 @@ export async function AlternatingSection(props: { data: SanityDocument }) {
 						__html: props?.data?.title || "",
 					}}
 				/>
+				{props?.data?.subtitle && (
+					<p
+						className="text-center"
+						dangerouslySetInnerHTML={{
+							__html: props?.data?.subtitle || "",
+						}}
+					/>
+				)}
 				<section className="pt-20">
 					{props?.data?.alternatingSectionsContent.map(
 						(item: SanityDocument, index: number) =>
