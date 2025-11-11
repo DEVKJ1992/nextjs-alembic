@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import { SITE_URL } from "../constants/site";
 import Image from "next/image";
-import { urlFor } from "../utility-functions";
+import { urlFor, components } from "../utility-functions";
 import Button from "../components/Button";
 import Link from "next/link";
 
@@ -186,7 +186,7 @@ export default async function AILab() {
 										<h4 className="md:text-[32px] text-[26px] leading-[32px] font-medium mt-5">
 											{item.title}
 										</h4>
-										<PortableText value={item.text} />
+										<PortableText value={item.text} components={components} />
 									</div>
 								)
 						)}
