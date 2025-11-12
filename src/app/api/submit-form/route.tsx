@@ -8,6 +8,7 @@ interface FormData {
 	firstName: string;
 	lastName: string;
 	companyName: string;
+	title: string;
 	email: string;
 	phone: string;
 	country: string;
@@ -50,6 +51,7 @@ export async function POST(request: Request) {
 		firstName,
 		lastName,
 		companyName,
+		title,
 		email,
 		phone,
 		country,
@@ -150,6 +152,7 @@ export async function POST(request: Request) {
 				First Name: ${firstName}\n
 				Last Name: ${lastName}\n
 				Company: ${companyName}\n
+				Title: ${title}\n
 				Email: ${email}\n
 				Country: ${country}\n
 				Phone: ${phone}\n
@@ -174,6 +177,7 @@ export async function POST(request: Request) {
 			firstName,
 			lastName,
 			companyName,
+			title,
 			email,
 			phone,
 			country,
@@ -194,6 +198,7 @@ export async function POST(request: Request) {
 				*Last Name:* ${lastName}
 				*Email:* ${email}
 				*Company Name:* ${companyName}
+				*Title:* ${title}
 				*Phone:* ${phone}
 				*Country:* ${country}
 				*How did you hear about Alembic:* ${how}

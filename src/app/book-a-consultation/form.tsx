@@ -40,6 +40,7 @@ export default function TalkForm({ data }: Props) {
 		lastName: "",
 		email: "",
 		companyName: "",
+		title: "",
 		phone: "",
 		country: "US",
 		how: "",
@@ -96,6 +97,7 @@ export default function TalkForm({ data }: Props) {
 					firstName: "",
 					lastName: "",
 					companyName: "",
+					title: "",
 					email: "",
 					phone: "",
 					country: "US",
@@ -204,6 +206,21 @@ export default function TalkForm({ data }: Props) {
 									value={formData.companyName ?? ""}
 									onChange={handleChange}
 									placeholder="Acme Corp."
+									className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
+								/>
+							</div>
+
+							{/* Title */}
+							<div className="mt-4">
+								<label className="block text-sm font-medium text-gray-700">
+									Title
+								</label>
+								<input
+									type="text"
+									name="title"
+									value={formData.title ?? ""}
+									onChange={handleChange}
+									placeholder="Your title"
 									className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
 								/>
 							</div>
