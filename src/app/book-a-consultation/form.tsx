@@ -150,7 +150,7 @@ export default function TalkForm({ data }: Props) {
 								{/* First Name */}
 								<div>
 									<label className="block text-sm font-medium text-gray-700">
-										First name
+										First name*
 									</label>
 									<input
 										type="text"
@@ -165,7 +165,7 @@ export default function TalkForm({ data }: Props) {
 								{/* Last Name */}
 								<div>
 									<label className="block text-sm font-medium text-gray-700">
-										Last name
+										Last name*
 									</label>
 									<input
 										type="text"
@@ -182,7 +182,7 @@ export default function TalkForm({ data }: Props) {
 							{/* Email */}
 							<div className="mt-4">
 								<label className="block text-sm font-medium text-gray-700">
-									Email
+									Email*
 								</label>
 								<input
 									type="email"
@@ -198,7 +198,7 @@ export default function TalkForm({ data }: Props) {
 							{/* Company */}
 							<div className="mt-4">
 								<label className="block text-sm font-medium text-gray-700">
-									Company
+									Company*
 								</label>
 								<input
 									type="text"
@@ -206,6 +206,7 @@ export default function TalkForm({ data }: Props) {
 									value={formData.companyName ?? ""}
 									onChange={handleChange}
 									placeholder="Acme Corp."
+									required
 									className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
 								/>
 							</div>
@@ -213,7 +214,7 @@ export default function TalkForm({ data }: Props) {
 							{/* Title */}
 							<div className="mt-4">
 								<label className="block text-sm font-medium text-gray-700">
-									Title
+									Title*
 								</label>
 								<input
 									type="text"
@@ -221,6 +222,7 @@ export default function TalkForm({ data }: Props) {
 									value={formData.title ?? ""}
 									onChange={handleChange}
 									placeholder="Your title"
+									required
 									className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
 								/>
 							</div>
@@ -228,7 +230,7 @@ export default function TalkForm({ data }: Props) {
 							{/* Phone Number */}
 							<div className="mt-4">
 								<label className="block text-sm font-medium text-gray-700">
-									Phone number
+									Phone number*
 								</label>
 								<div className="flex flex-col sm:flex-row mt-1 gap-2">
 									<select
@@ -255,7 +257,7 @@ export default function TalkForm({ data }: Props) {
 							{/* Message */}
 							<div className="mt-4">
 								<label className="block text-sm font-medium text-gray-700">
-									How did you hear about Alembic?
+									How did you hear about Alembic?*
 								</label>
 								<div className="flex flex-col sm:flex-row mt-1 gap-2">
 									<select
@@ -311,7 +313,7 @@ export default function TalkForm({ data }: Props) {
 													howOther: e.target.value,
 												}))
 											}
-											placeholder="Please specify here"
+											placeholder="Please specify here*"
 											className="border-[#D0D5DD80] border-2 p-2 focus:border-indigo-500 focus:ring-indigo-500"
 											required
 										/>

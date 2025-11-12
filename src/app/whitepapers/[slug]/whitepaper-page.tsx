@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { type SanityDocument } from "next-sanity";
+import Image from "next/image";
 
 export default function WhitepaperPage({
 	whitepaper,
@@ -25,6 +26,7 @@ export default function WhitepaperPage({
 		firstName: "",
 		lastName: "",
 		companyName: "",
+		title: "",
 		email: "",
 		country: "US",
 		phone: "",
@@ -86,6 +88,7 @@ export default function WhitepaperPage({
 					firstName: "",
 					lastName: "",
 					companyName: "",
+					title: "",
 					email: "",
 					phone: "",
 					country: "US",
@@ -114,7 +117,7 @@ export default function WhitepaperPage({
 		<div className="py-20 no-footer-section">
 			<div className="flex gap-2 max-w-[1220px] xl:px-0 px-5 flex-row xl:mt-20 lg:mt-20 md:mt-15 mt-5 flex-wrap mx-auto">
 				<div className="left-col xl:flex-1 lg:flex-1 md:flex-1">
-					<div className="max-w-[1220px] mx-auto xl:px-0 px-5 mb-8">
+					<div className="max-w-[1220px] mx-auto xl:px-0 md:px-5 px-0 mb-8">
 						<p className="architekt uppercase text-[var(--alembic-purple)] mb-0 pb-0]">
 							{whitepaper.eyebrowTitle}
 						</p>
@@ -131,12 +134,31 @@ export default function WhitepaperPage({
 							/>
 						</p>
 					</div>
+					<div className="col-head flex items-center gap-5 relative mt-16 pr-5">
+						<hr className="w-[100%] border-black" />
+						<Image
+							src="/images/quote.svg"
+							alt=""
+							width={50}
+							height={50}
+							className="absolute top-[-25px] left-[86%]"
+						></Image>
+					</div>
+					<p className="font-semibold text-[24px] leading-[28px] mt-10">
+						AI-native simulation platforms are transforming
+						enterprise decision-making by embedding AI assistants,
+						automation, and natural language interfaces.
+					</p>
+					<p className="font-semibold text-[32px] mt-2 pb-2">
+						Gartner
+					</p>
+					<p className="">2025 (1)</p>
 				</div>
-				<div className="right-col xl:flex-1 lg:flex-1 flex-1">
-					<form
-						onSubmit={handleSubmit}
-						className="w-full max-w-2xl bg-white p-6 sm:p-8 h-full"
-					>
+				<div className="right-col xl:flex-1 lg:flex-1 flex-1 md:p-6 p-0">
+					<h3 className="font-normal text-[32px] md:leading-[40px] pt-10 pb-5">
+						{whitepaper.shortTitle}
+					</h3>
+					<form onSubmit={handleSubmit} className="w-full max-w-2xl">
 						{isSubmitted ? (
 							// Display success message
 							<div className="flex flex-col gap-[20px] h-full justify-center">
@@ -224,6 +246,22 @@ export default function WhitepaperPage({
 										value={formData.companyName ?? ""}
 										onChange={handleChange}
 										placeholder="Acme Corp."
+										className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
+									/>
+								</div>
+
+								{/* Title */}
+								<div className="mt-4">
+									<label className="block text-sm font-medium text-gray-700">
+										Title
+									</label>
+									<input
+										type="text"
+										name="title"
+										value={formData.title ?? ""}
+										onChange={handleChange}
+										placeholder="Your title"
+										required
 										className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
 									/>
 								</div>
@@ -359,13 +397,37 @@ export default function WhitepaperPage({
 								>
 									{isSubmitting
 										? "Submitting..."
-										: "SUBMIT >"}
+										: "SPEAK TO A STRATEGIST >"}
 								</button>
+								<p className="font-light text-[14px] leading-[20px] mt-5">
+									Simulation — Technology and Platform
+									Innovation By: Stacey Yin, Walker Black,
+									Evan Brown, Mark Wah, Alfonso Velosa, Ethan
+									Cai Published June 27th 2025
+								</p>
 							</>
 						)}
 					</form>
 					{message && <p className="mt-2 text-red-600">{message}</p>}
 				</div>
+				<p className="text-[var(--alembic-black)] font-light text-[12px] leading-[17px]">
+					GARTNER is a registered trademark and service mark of
+					Gartner, Inc. and/or its affiliates in the U.S. and
+					internationally and is used herein with permission. All
+					rights reserved.
+					<br />
+					<br />
+					Gartner does not endorse any vendor, product or service
+					depicted in its research publications, and does not advise
+					technology users to select only those vendors with the
+					highest ratings or other designation. Gartner research
+					publications consist of the opinions of Gartner’s research
+					organization and should not be construed as statements of
+					fact. Gartner disclaims all warranties, expressed or
+					implied, with respect to this research, including any
+					warranties of merchantability or fitness for a particular
+					purpose.
+				</p>
 			</div>
 		</div>
 	);
