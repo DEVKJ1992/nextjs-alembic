@@ -26,7 +26,7 @@ export default function Navbar(props: {
 		<>
 			<nav className="bg-white fixed w-full z-20">
 				{props.banner && (
-					<div className="bg-[var(--alembic-purple)] w-full py-2 text-center text-[14px] px-4">
+					<div className="bg-[var(--alembic-purple)] w-full py-2 text-center text-[14px] text-white px-4">
 						{props.banner}
 					</div>
 				)}
