@@ -116,7 +116,7 @@ export default async function CompanyPage() {
 					<h2 className="text-black md:text-[48px] text-[42px] text-center font-semibold">
 						{data?.logosTitle}
 					</h2>
-					<div className="flex flex-wrap md:flex-row flex-col content-center md:gap-12 gap-20 justify-center py-10">
+					<div className="flex flex-wrap md:flex-row flex-col content-center items-center md:gap-12 gap-20 justify-center py-10">
 						{data?.logos?.map((logo: Logo) => (
 							<div
 								className="max-w-[200px] max-h-[90px]"
