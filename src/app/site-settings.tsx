@@ -3,7 +3,7 @@ import { type SanityDocument } from "next-sanity";
 
 export default async function siteSettings() {
 	const query = `*[_type == "siteSettings"][0]`;
-	const options = { next: { revalidate: 86400 } };
+	const options = { next: { revalidate: 0 } };
 
 	let siteSettings: SanityDocument | null = null;
 
