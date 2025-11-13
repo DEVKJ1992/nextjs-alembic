@@ -76,7 +76,7 @@ export default function TestimonialSliderTemplate({
 		<div className="relative">
 			<Slider {...settings}>
 				{testimonials?.map((testimonial) => (
-					<div className="slides" key={testimonial._key}>
+					<div className="slides px-[0.05rem]" key={testimonial._key}>
 						<div className="flex flex-row flex-wrap max-w-[1210px]">
 							<div className="md:basis-1/3 w-[100%] mt-5">
 								<Image
@@ -101,8 +101,13 @@ export default function TestimonialSliderTemplate({
 											<h4 className="md:text-[32px] text-[18px] font-semibold">
 												{testimonial.name}
 											</h4>
-											<span className="md:text-[18px] text-[14px] tracking-[-0.4px]">
-												{testimonial.designation}
+											<span
+												className="md:text-[18px] text-[14px] tracking-[-0.4px]"
+												dangerouslySetInnerHTML={{
+													__html: testimonial.designation,
+												}}
+											>
+												{}
 											</span>
 										</div>
 									</div>

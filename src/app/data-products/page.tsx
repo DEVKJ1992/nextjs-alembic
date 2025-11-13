@@ -55,7 +55,6 @@ export default async function AILab() {
 		"Data Products Page"
 	);
 
-	console.log(data);
 	return (
 		<div className="overflow-hidden">
 			{/* Banner Section */}
