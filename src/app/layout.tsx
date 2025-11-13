@@ -150,9 +150,12 @@ export default async function RootLayout({
 				<Navbar
 					logoUrl={siteLogoUrl ?? ""}
 					nav={siteSettingsData?.siteSettings?.menuItems}
+					banner={siteSettingsData?.siteSettings?.topBanner}
 				/>
 
-				<div className="bg-white pt-12">
+				<div
+					className={`bg-white ${siteSettingsData?.siteSettings?.topBanner ? "pt-24 sm:pt-12 " : "pt-12"}`}
+				>
 					<DraftModeProvider>{children}</DraftModeProvider>
 				</div>
 
