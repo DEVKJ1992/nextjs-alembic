@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
 			title: page.seo?.metaTitle
 				? page.seo?.metaTitle + " | Alembic"
 				: page.title
-				? page?.title + " | Alembic"
-				: "Alembic",
+					? page?.title + " | Alembic"
+					: "Alembic",
 			description:
 				page.seo?.metaDescription ?? "Contact us for more information",
 			openGraph: {
@@ -127,7 +127,7 @@ export default async function CompanyPage() {
 									alt={logo.logo.alt ?? ""}
 									width={200}
 									height={100}
-									className="max-h-[150px] w-full h-full"
+									className="max-h-[150px] w-full h-full object-contain"
 								></Image>
 							</div>
 						))}
