@@ -26,9 +26,12 @@ export default function Navbar(props: {
 		<>
 			<nav className="bg-white fixed w-full z-20">
 				{props.banner && (
-					<div className="bg-[var(--alembic-purple)] w-full py-2 text-center text-[14px] text-white px-4">
-						{props.banner}
-					</div>
+					<div
+						className="cursor-pointer bg-[var(--alembic-purple)] w-full py-2 text-center text-[14px] text-white px-4"
+						dangerouslySetInnerHTML={{
+							__html: props.banner,
+						}}
+					/>
 				)}
 				<div className="container mx-auto px-4">
 					<div className="flex justify-between items-center h-20">
