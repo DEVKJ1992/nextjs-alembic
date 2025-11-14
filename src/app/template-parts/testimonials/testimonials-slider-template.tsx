@@ -81,9 +81,11 @@ export default function TestimonialSliderTemplate({
 							<div className="md:basis-1/3 w-[100%] mt-5">
 								<Image
 									src={
-										urlFor(testimonial.image)
-											?.fit("max")
-											.url() ?? ""
+										(testimonial.image &&
+											urlFor(testimonial.image)
+												?.fit("max")
+												.url()) ??
+										""
 									}
 									alt={testimonial.name}
 									width={400}

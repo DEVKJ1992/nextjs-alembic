@@ -246,6 +246,7 @@ export default function WhitepaperPage({
 										value={formData.companyName ?? ""}
 										onChange={handleChange}
 										placeholder="Acme Corp."
+										required
 										className="mt-1 block w-full border-[#D0D5DD80] border-2 focus:border-indigo-500 focus:ring-indigo-500 p-2"
 									/>
 								</div>
@@ -277,6 +278,7 @@ export default function WhitepaperPage({
 											value={formData.country}
 											onChange={handleChange}
 											aria-label="Select country"
+											required
 											className="border-[#D0D5DD80] border-2 px-2 bg-white sm:w-auto w-full"
 										>
 											<option value="US">US</option>
