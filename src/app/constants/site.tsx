@@ -1,2 +1,2 @@
 export const SITE_URL =
-	process.env.NEXT_PUBLIC_SITE_URL || "https://getalembic.com";
+	process.env.NEXT_PUBLIC_SITE_URL || "https://alembic.com";

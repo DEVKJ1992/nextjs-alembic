@@ -57,7 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
 		openGraph: {
 			title: metaTitle,
 			description: metaDescription,
-			url: "https://getalembic.com",
+			url: "https://alembic.com",
 			siteName: "Alembic",
 			images: [
 				{
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
 			images: [metaImage],
 		},
 		alternates: {
-			canonical: "https://getalembic.com",
+			canonical: "https://alembic.com",
 		},
 		generator: "Next.js",
 		other: {
@@ -104,14 +104,14 @@ export default async function RootLayout({
 				<Suspense fallback={<div>Loading...</div>}>
 					<TermlyCMP
 						autoBlock={true}
-						masterConsentsOrigin="https://getalembic.com"
+						masterConsentsOrigin="https://alembic.com"
 						websiteUUID={WEBSITE_UUID}
 					/>
 				</Suspense>
 				{/* Google Analytics */}
 				<Script
 					strategy="afterInteractive"
-					src="https://www.googletagmanager.com/gtag/js?id=UA-131483738-2"
+					src="https://www.googletagmanager.com/gtag/js?id=G-K4M7W4P815"
 				/>
 				<Script id="google-analytics" strategy="afterInteractive">
 					{`
@@ -120,7 +120,7 @@ export default async function RootLayout({
               dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', 'UA-131483738-2');
+            gtag('config', 'G-K4M7W4P815');
           `}
 				</Script>
 

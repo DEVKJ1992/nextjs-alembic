@@ -2,73 +2,67 @@
 import { sanityClient } from "./src/sanity/sanity.js";
 
 const config = {
-	siteUrl: "https://getalembic.com",
+	// 1. Core Settings
+	siteUrl: "https://alembic.com",
 	generateRobotsTxt: true,
-	sitemapSize: 7000,
-	// Optional: Exclude specific paths
+
+	// 2. KEY CHANGE: Setting sitemapSize to 0 generates a single sitemap (sitemap.xml).
+	// The default is typically 50000, so any number > 0 enables splitting.
+	sitemapSize: 50000,
+
+	// Optional: Exclude specific paths (This remains great for static exclusions)
 	exclude: ["/admin/*", "/private/*"],
-	// Optional: Add dynamic routes
+
+	// 3. Dynamic Routes: Combined Fetch and Mapping Logic
 	additionalPaths: async () => {
-		// Fetch slugs from Sanity
+		// --- Fetch Slugs from Sanity ---
 		const postQuery = `*[_type == "post" && defined(slug.current) && !(_id in path("drafts.**"))]{ "slug": slug.current }`;
 		const whitepaperQuery = `*[_type == "whitepaper" && type == "Whitepaper" && defined(slug.current) && !(_id in path("drafts.**"))]{ "slug": slug.current }`;
 		const caseStudyQuery = `*[_type == "whitepaper" && type == "Case-Study" && defined(slug.current) && !(_id in path("drafts.**"))]{ "slug": slug.current }`;
-		const posts = await sanityClient.fetch(postQuery);
-		const whitepapers = await sanityClient.fetch(whitepaperQuery);
-		const caseStudies = await sanityClient.fetch(caseStudyQuery);
 
-		// Map slugs to sitemap entries
-		const dynamicPosts = posts.map((post) => ({
-			loc: `/${post.slug}`, // Adjust path based on your route structure
+		const [posts, whitepapers, caseStudies] = await Promise.all([
+			sanityClient.fetch(postQuery),
+			sanityClient.fetch(whitepaperQuery),
+			sanityClient.fetch(caseStudyQuery),
+		]);
+
+		// --- Sitemap Entry Mapping ---
+		const mapToSitemapEntry = (slug, locPrefix = "") => ({
+			loc: `${locPrefix}/${slug}`,
 			changefreq: "daily",
 			priority: 0.7,
+			// Note: You might want to use the actual update date from Sanity here
+			// instead of `new Date().toISOString()` for better SEO.
 			lastmod: new Date().toISOString(),
-		}));
+		});
 
-		const dynamicWhitepapers = whitepapers.map((post) => ({
-			loc: `/whitepapers/${post.slug}`, // Adjust path based on your route structure
-			changefiesreq: "daily",
-			priority: 0.7,
-			lastmod: new Date().toISOString(),
-		}));
+		const dynamicPosts = posts.map((post) =>
+			mapToSitemapEntry(post.slug, "")
+		);
+		const dynamicWhitepapers = whitepapers.map((post) =>
+			mapToSitemapEntry(post.slug, "/whitepapers")
+		);
+		const dynamicCaseStudies = caseStudies.map((post) =>
+			mapToSitemapEntry(post.slug, "/case-studies")
+		);
 
-		const dynamicCaseStudies = caseStudies.map((post) => ({
-			loc: `/case-studies/${post.slug}`, // Adjust path based on your route structure
-			changefreq: "daily",
-			priority: 0.7,
-			lastmod: new Date().toISOString(),
-		}));
-
-		const blogIndex = {
-			loc: "/blog",
-			changefreq: "daily",
-			priority: 0.7,
-			lastmod: new Date().toISOString(),
-		};
-
-		const newsIndex = {
-			loc: "/news",
-			changefreq: "daily",
-			priority: 0.7,
-			lastmod: new Date().toISOString(),
-		};
+		// Static Indexes
+		const staticIndexes = [
+			mapToSitemapEntry("blog"),
+			mapToSitemapEntry("news"),
+		];
 
 		return [
 			...dynamicPosts,
 			...dynamicWhitepapers,
 			...dynamicCaseStudies,
-			blogIndex,
-			newsIndex,
+			...staticIndexes,
 		];
 	},
-	transform: async (config, path) => {
-		return {
-			loc: path,
-			changefreq: "daily",
-			priority: 0.7,
-			lastmod: new Date().toISOString(),
-		};
-	},
+
+	// 4. REMOVED: The `transform` function is redundant when `additionalPaths`
+	// already defines all the necessary properties (changefreq, priority, lastmod)
+	// for dynamic routes, and the default behavior is sufficient for static files.
 };
 
 export default config;

@@ -68,7 +68,7 @@ export default async function PostPage({
 
 	return (
 		<main>
-			<div className="container mx-auto min-h-screen p-8 flex flex-col gap-4">
+			<div className="container mx-auto min-h-screen p-8 flex flex-col gap-4 blog-post">
 				{postImageUrl && (
 					<Image
 						src={postImageUrl}
@@ -89,7 +89,7 @@ export default async function PostPage({
 						{post?.title}
 					</h1>
 					<div className="prose">
-						<p>
+						<p suppressHydrationWarning>
 							Published:{" "}
 							{new Date(post?.publishedAt).toLocaleDateString()}
 						</p>

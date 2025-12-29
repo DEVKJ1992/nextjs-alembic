@@ -195,6 +195,10 @@ nav a:hover {
 	object-position: 60% 50%; /* Default for mobile */
 }
 
+.blog-post iframe {
+	width: 100%;
+}
+
 @media screen and (max-width: 1024px) {
 	nav .text-gray-700 {
 		font-size: 14px;

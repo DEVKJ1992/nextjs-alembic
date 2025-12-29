@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Alembic Deploys
 
-Pushes to main will trigger a .github action (see .github/workflows/deploy_production.yml) and deploy to our server at https://getalembic.com
+Pushes to main will trigger a .github action (see .github/workflows/deploy_production.yml) and deploy to our server at https://alembic.com
