@@ -51,11 +51,14 @@ export default async function CESPage(){
 		<div className="pt-20">
 			<Banner 
 			data={data?.banner || null}
+			bannerVideo={data?.bannerVideo}
 			/>
 			<div className="max-w-[1220px] mx-auto xl:px-0 px-5">
-				<div className="mb-10 mt-20">
-					<iframe style={{width: "100%", height: "690px"}} width="560" height="315" src={data?.youtubeVideoLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-				</div>
+				{data?.youtubeVideoLink && (
+					<div className="mb-10 mt-20">
+						<iframe style={{width: "100%", height: "690px"}} width="560" height="315" src={data?.youtubeVideoLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+					</div>
+				)}
 				<div className="mb-10 mt-20">
 					<h2 className="text-center">{data?.pageTitle}</h2>
 				</div>
