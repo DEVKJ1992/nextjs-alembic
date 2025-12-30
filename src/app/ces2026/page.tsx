@@ -56,7 +56,7 @@ export default async function CESPage(){
 			<div className="max-w-[1220px] mx-auto xl:px-0 px-5">
 				{data?.youtubeVideoLink && (
 					<div className="mb-10 mt-20">
-						<iframe style={{width: "100%", height: "690px"}} width="560" height="315" src={data?.youtubeVideoLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+						<iframe style={{width: "100%", maxHeight: "700px", height: "50vw"}} width="560" height="315" src={data?.youtubeVideoLink} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 					</div>
 				)}
 				<div className="mb-10 mt-20">
