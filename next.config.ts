@@ -98,20 +98,6 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
-				// This matches every path on the source domain
-				source: "/:path*",
-				// This checks the Host header for the specific domain
-				has: [
-					{
-						type: "host",
-						value: "getalembic.com",
-					},
-				],
-				// Redirects to the destination domain, preserving the path and query parameters
-				destination: "https://alembic.com/:path*",
-				permanent: true, // Use permanent: true (301 status) for SEO
-			},
-			{
 				source: "/book-a-demo",
 				destination: "/book-a-consultation",
 				permanent: true,
