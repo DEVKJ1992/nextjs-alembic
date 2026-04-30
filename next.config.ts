@@ -69,7 +69,8 @@ const nextConfig: NextConfig = {
 								https://www.linkedin.com
 								https://px.ads.linkedin.com
 								https://www.googletagmanager.com
-								https://www.google-analytics.com;
+								https://www.google-analytics.com
+								https://*.google.com;
 							font-src 'self' https://fonts.gstatic.com;
 							connect-src 'self'
 								https://cdn.sanity.io

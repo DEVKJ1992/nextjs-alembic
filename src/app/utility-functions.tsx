@@ -162,7 +162,7 @@ export async function getData(
 	params?: { slug: string },
 	isDraft = false
 ) {
-	const options = { next: { revalidate: isDraft ? 0 : 0 } };
+	const options = { next: { revalidate: isDraft ? 0 : 3600 } };
 
 	let data: SanityDocument | null = null;
 	try {
