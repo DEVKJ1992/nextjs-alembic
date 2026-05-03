@@ -52,7 +52,7 @@ export default async function VenturesPage() {
 	return (
 		<div className="Ventures-parent">
 			<div className="xl:p-10 p-5 max-w-[1280px] m-auto">
-				<h1 className="mb-6 mt-4 pt-4 text-[48px] sm:text-[120px]">
+				<h1 className="mb-6 mt-4 pt-10 text-[48px] sm:text-[120px]">
 					Alembic Ventures
 				</h1>
 				<h3
