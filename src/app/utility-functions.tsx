@@ -212,7 +212,7 @@ export const components: PortableTextComponents = {
 		code: ({ value }: { value: { code: string } }) => (
 			<div
 				dangerouslySetInnerHTML={{
-					__html: value.code,
+					__html: value?.code || "",
 				}}
 			/>
 		),

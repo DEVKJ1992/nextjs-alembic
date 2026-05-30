@@ -129,7 +129,7 @@ export default function WhitepaperPage({
 						<p className="max-w-[575px] text-[var(--alembic-black)] text-[16px] font-medium">
 							<span
 								dangerouslySetInnerHTML={{
-									__html: whitepaper.description,
+									__html: whitepaper.description || "",
 								}}
 							/>
 						</p>

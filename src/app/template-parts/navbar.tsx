@@ -29,7 +29,7 @@ export default function Navbar(props: {
 					<div
 						className="cursor-pointer bg-[var(--alembic-purple)] w-full py-2 text-center text-[14px] text-white px-4"
 						dangerouslySetInnerHTML={{
-							__html: props.banner,
+							__html: props.banner || "",
 						}}
 					/>
 				)}

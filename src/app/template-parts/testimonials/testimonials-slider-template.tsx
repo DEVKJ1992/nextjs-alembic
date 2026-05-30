@@ -106,11 +106,9 @@ export default function TestimonialSliderTemplate({
 											<span
 												className="md:text-[18px] text-[14px] tracking-[-0.4px]"
 												dangerouslySetInnerHTML={{
-													__html: testimonial.designation,
+													__html: testimonial.designation || "",
 												}}
-											>
-												{}
-											</span>
+											/>
 										</div>
 									</div>
 								</div>
