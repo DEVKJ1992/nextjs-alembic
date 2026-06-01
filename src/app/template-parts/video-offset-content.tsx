@@ -30,7 +30,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 				<Link
 					onClick={openModal}
 					href="#"
-					className="w-[105] flex justify-center items-center absolute top-[17.5vw]"
+					className={`w-[105] flex justify-center items-center absolute ${props?.data?.sectionTitle ? "top-[10vw]" : "top-[17.5vw]"}`}
 				>
 					<span>
 						<Image
