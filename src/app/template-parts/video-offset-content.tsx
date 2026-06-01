@@ -14,6 +14,10 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
 
+	const isDirectVideo =
+		props?.data?.youtubeUrl?.match(/\.(mp4|webm|ogg|mov)(\?.*)?$/i) ||
+		props?.data?.youtubeUrl?.includes("raw=1");
+
 	return (
 		<div className="vid-box max-w-[1220px] mx-auto mt-36 pb-20 relative flex flex-col items-center">
 			<Image
@@ -49,13 +53,22 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 					ariaHideApp={false}
 				>
 					<div className="relative w-full h-0 pb-[56.25%]">
-						<iframe
-							src={props?.data?.youtubeUrl}
-							title="YouTube Video"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-							allowFullScreen
-							className="absolute top-0 left-0 w-full h-full"
-						></iframe>
+						{isDirectVideo ? (
+							<video
+								src={props?.data?.youtubeUrl}
+								controls
+								autoPlay
+								className="absolute top-0 left-0 w-full h-full bg-black"
+							/>
+						) : (
+							<iframe
+								src={props?.data?.youtubeUrl}
+								title="Video Player"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+								className="absolute top-0 left-0 w-full h-full"
+							></iframe>
+						)}
 					</div>
 				</Modal>
 			)}
@@ -90,7 +103,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 											components={components}
 										/>
 									</div>
-								)
+								),
 						)}
 						{props?.data?.ctaText && (
 							<div className="w-[100%] flex flex-col">
@@ -124,7 +137,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 											<Image
 												src={
 													urlFor(
-														item?.image
+														item?.image,
 													)?.url() ?? ""
 												}
 												alt=""
@@ -133,7 +146,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 											></Image>
 										)}
 									</div>
-								)
+								),
 						)}
 
 						{props?.data?.ctaText && (

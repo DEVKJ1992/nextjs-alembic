@@ -81,6 +81,10 @@ const nextConfig: NextConfig = {
 								https://app.termly.io
 								https://us.consent.api.termly.io
 								https://px.ads.linkedin.com;
+							media-src 'self'
+								https://www.dropbox.com
+								https://*.dropboxusercontent.com
+								https://cdn.sanity.io;
 							frame-src
 								https://www.youtube.com
 								https://www.youtube-nocookie.com
