@@ -53,7 +53,7 @@ export default async function IndexPage() {
 								alt="Alembic secure enterprise-grade solution"
 								width={786}
 								height={584}
-								className="w-full h-auto object-cover"
+								className="w-full h-auto object-cover border border-gray-200 rounded-lg"
 							/>
 						</div>
 					</div>
