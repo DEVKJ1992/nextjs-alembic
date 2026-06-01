@@ -160,9 +160,9 @@ export async function getData(
 	query: string,
 	page: string,
 	params?: { slug: string },
-	isDraft = false
+	isDraft = false,
 ) {
-	const options = { next: { revalidate: isDraft ? 0 : 3600 } };
+	const options = { next: { revalidate: isDraft ? 0 : 10 } };
 
 	let data: SanityDocument | null = null;
 	try {
@@ -175,13 +175,13 @@ export async function getData(
 				params ?? {},
 				{
 					cache: "no-store",
-				}
+				},
 			);
 		} else {
 			data = await client.fetch<SanityDocument>(
 				query,
 				params ?? {},
-				options
+				options,
 			);
 		}
 		return data;
