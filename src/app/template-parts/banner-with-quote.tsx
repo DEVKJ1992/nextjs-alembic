@@ -105,7 +105,7 @@ export async function BannerWithQuote(props: {
 										stroke={
 											isMobile || !props?.bannerVideo
 												? "#F7F7F7"
-												: "#D6D6D6"
+												: "#D4D4D4"
 										}
 										strokeWidth="8"
 									/>
