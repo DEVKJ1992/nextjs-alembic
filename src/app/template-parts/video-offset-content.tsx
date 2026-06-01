@@ -30,7 +30,7 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 				<Link
 					onClick={openModal}
 					href="#"
-					className="w-[105] flex justify-center items-center absolute top-[10vw]"
+					className="w-[105] flex justify-center items-center absolute top-[17.5vw]"
 				>
 					<span>
 						<Image
@@ -73,96 +73,98 @@ export function VideoOffsetContent(props: { data: SanityDocument }) {
 				</Modal>
 			)}
 
-			<div className="txt-head max-w-[966px] mx-auto bg-white p-10 md:mt-[-320px] mt-0 z-10 relative">
-				<h3
-					className={`text-[32px] font-semibold leading-[35px] ${props?.data?.style === "Style 1" ? "max-w-[650px]" : ""}`}
-				>
-					{props?.data?.sectionTitle}
-				</h3>
-				{props?.data?.subtitle && (
-					<p
-						dangerouslySetInnerHTML={{
-							__html: props?.data?.subtitle || "",
-						}}
-					/>
-				)}
-				{props?.data?.style === "Style 1" ? (
-					<div className="flex flex-wrap gap-3 justify-between mt-10">
-						{props?.data?.body?.map(
-							(item: SanityDocument) =>
-								item && (
-									<div
-										className="xl:w-[47%] md:w-[47%] w-[100%] flex flex-col py-5"
-										key={item._key}
+			{props?.data?.sectionTitle && (
+				<div className="txt-head max-w-[966px] mx-auto bg-white p-10 md:mt-[-320px] mt-0 z-10 relative">
+					<h3
+						className={`text-[32px] font-semibold leading-[35px] ${props?.data?.style === "Style 1" ? "max-w-[650px]" : ""}`}
+					>
+						{props?.data?.sectionTitle}
+					</h3>
+					{props?.data?.subtitle && (
+						<p
+							dangerouslySetInnerHTML={{
+								__html: props?.data?.subtitle || "",
+							}}
+						/>
+					)}
+					{props?.data?.style === "Style 1" ? (
+						<div className="flex flex-wrap gap-3 justify-between mt-10">
+							{props?.data?.body?.map(
+								(item: SanityDocument) =>
+									item && (
+										<div
+											className="xl:w-[47%] md:w-[47%] w-[100%] flex flex-col py-5"
+											key={item._key}
+										>
+											<h4 className="text-[18px] pb-0 font-bold mt-5">
+												{item.title}
+											</h4>
+											<PortableText
+												value={item.text}
+												components={components}
+											/>
+										</div>
+									),
+							)}
+							{props?.data?.ctaText && (
+								<div className="w-[100%] flex flex-col">
+									<Button
+										href={props?.data?.ctaUrl}
+										variant="primary"
+										className="ml-auto"
 									>
-										<h4 className="text-[18px] pb-0 font-bold mt-5">
-											{item.title}
-										</h4>
-										<PortableText
-											value={item.text}
-											components={components}
-										/>
-									</div>
-								),
-						)}
-						{props?.data?.ctaText && (
-							<div className="w-[100%] flex flex-col">
-								<Button
-									href={props?.data?.ctaUrl}
-									variant="primary"
-									className="ml-auto"
-								>
-									{props?.data?.ctaText}
-								</Button>
-							</div>
-						)}
-					</div>
-				) : (
-					<div className="flex flex-wrap gap-3 justify-between mt-10">
-						{props?.data?.body?.map(
-							(item: SanityDocument) =>
-								item && (
-									<div
-										className="xl:w-[47%] md:w-[47%] w-[100%] flex flex-col py-2"
-										key={item._key}
-									>
-										{/* <h4 className="text-[18px] pb-0 font-bold mt-5">
+										{props?.data?.ctaText}
+									</Button>
+								</div>
+							)}
+						</div>
+					) : (
+						<div className="flex flex-wrap gap-3 justify-between mt-10">
+							{props?.data?.body?.map(
+								(item: SanityDocument) =>
+									item && (
+										<div
+											className="xl:w-[47%] md:w-[47%] w-[100%] flex flex-col py-2"
+											key={item._key}
+										>
+											{/* <h4 className="text-[18px] pb-0 font-bold mt-5">
 											{item.title}
 										</h4> */}
-										<PortableText
-											value={item.text}
-											components={components}
-										/>
-										{item?.image && (
-											<Image
-												src={
-													urlFor(
-														item?.image,
-													)?.url() ?? ""
-												}
-												alt=""
-												width={400}
-												height={250}
-											></Image>
-										)}
-									</div>
-								),
-						)}
+											<PortableText
+												value={item.text}
+												components={components}
+											/>
+											{item?.image && (
+												<Image
+													src={
+														urlFor(
+															item?.image,
+														)?.url() ?? ""
+													}
+													alt=""
+													width={400}
+													height={250}
+												></Image>
+											)}
+										</div>
+									),
+							)}
 
-						{props?.data?.ctaText && (
-							<div className="w-[100%] flex flex-col">
-								<Button
-									href={props?.data?.ctaUrl}
-									variant="primary"
-									className="mt-6"
-								>
-									{props?.data?.ctaText}
-								</Button>
-							</div>
-						)}
-					</div>
-				)}
-			</div>
+							{props?.data?.ctaText && (
+								<div className="w-[100%] flex flex-col">
+									<Button
+										href={props?.data?.ctaUrl}
+										variant="primary"
+										className="mt-6"
+									>
+										{props?.data?.ctaText}
+									</Button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 }
