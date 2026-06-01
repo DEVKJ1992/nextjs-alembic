@@ -60,7 +60,9 @@ export async function BannerWithQuote(props: {
 			{props?.data && (
 				<div className="banner max-w-[1220px] mx-auto pt-36 pb-0 xl:px-0 px-5 relative z-10">
 					<div className="col max-w-[900px]">
-						<h1>{props.data.title}</h1>
+						<h1 className="md:max-w-full max-w-[70%]">
+							{props.data.title}
+						</h1>
 						<div className="max-w-[600px] my-1">
 							<PortableText value={props.data.body} />
 						</div>
@@ -131,7 +133,12 @@ export async function BannerWithQuote(props: {
 															<span
 																className="md:text-[18px] text-[14px] tracking-[-0.4px]"
 																dangerouslySetInnerHTML={{
-																	__html: props?.data?.testimonial?.designation || "",
+																	__html:
+																		props
+																			?.data
+																			?.testimonial
+																			?.designation ||
+																		"",
 																}}
 															/>
 														</div>
