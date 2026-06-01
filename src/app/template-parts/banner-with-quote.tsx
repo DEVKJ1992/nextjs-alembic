@@ -59,7 +59,7 @@ export async function BannerWithQuote(props: {
 			{/* Content */}
 			{props?.data && (
 				<div className="banner max-w-[1220px] mx-auto pt-36 pb-0 xl:px-0 px-5 relative z-10">
-					<div className="col max-w-[900px]">
+					<div className="col max-w-[950px]">
 						<h1 className="md:max-w-full max-w-[70%]">
 							{props.data.title}
 						</h1>
