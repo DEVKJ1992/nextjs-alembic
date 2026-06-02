@@ -171,8 +171,6 @@ export default async function IndexPage() {
 			<VideoOffsetContent data={home?.videoSection || null} />
 			{/* video sec */}
 
-			<div className="md:h-[50px] h-0"></div>
-
 			{/* blogs section */}
 			<ThreeColumnBlog />
 			{/* blogs section */}
