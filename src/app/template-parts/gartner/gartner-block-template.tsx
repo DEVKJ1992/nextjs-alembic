@@ -41,13 +41,15 @@ export default function GartnerBlockTemplate({ data }: Props) {
 				>
 					{ctaText} &gt;
 				</Link>
-				<Image
-					src={imageUrl}
-					alt="Gartner logo"
-					width={200}
-					height={50}
-					className="md:pt-0 pt-4"
-				/>
+				{imageUrl && (
+					<Image
+						src={imageUrl}
+						alt="Gartner logo"
+						width={200}
+						height={50}
+						className="md:pt-0 pt-4"
+					/>
+				)}
 			</div>
 		</div>
 	);

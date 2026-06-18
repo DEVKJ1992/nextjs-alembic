@@ -19,24 +19,54 @@ export async function generateMetadata({
 	const post = await client.fetch<SanityDocument>(
 		POST_QUERY,
 		await params,
-		options
+		options,
 	);
 
 	const canonicalUrl = `${SITE_URL}/${(await params).slug}`;
 
+	const title = post.metaTitle
+		? post?.metaTitle + " | Alembic" ||
+			"Casual AI Platform & Intelligent Simulation Solution | Alembic"
+		: post.shortTitle
+			? post?.shortTitle + " | Alembic"
+			: "Blog | Alembic";
+
+	const description = post.metaDescription
+		? post?.metaDescription ||
+			"Uncover marketing success with Alembic's AI-driven analytics. Predict revenue outcomes, optimize media spend, and gain actionable insights in real-time."
+		: "contact us for more information";
+
+	const metaImage = urlFor(post?.metaImage)?.url() ?? "";
+
 	return {
-		title: post.metaTitle
-			? post?.metaTitle + " | Alembic" ||
-				"AI Marketing Analytics Software & Intelligence Planning Solutions | Alembic"
-			: post.shortTitle
-				? post?.shortTitle + " | Alembic"
-				: "Blog | Alembic",
-		description: post.metaDescription
-			? post?.metaDescription ||
-				"Uncover marketing success with Alembic's AI-driven analytics. Predict revenue outcomes, optimize media spend, and gain actionable insights in real-time."
-			: "contact us for more information",
+		title: {
+			default: title,
+			template: `%s`,
+		},
+		description: description,
 		alternates: {
 			canonical: canonicalUrl,
+		},
+		openGraph: {
+			title,
+			description,
+			url: canonicalUrl,
+			siteName: "Alembic",
+			images: [
+				{
+					url: metaImage,
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			],
+			type: "article",
+		},
+		twitter: {
+			title,
+			description,
+			card: "summary_large_image",
+			images: [metaImage],
 		},
 	};
 }
@@ -55,7 +85,7 @@ export default async function PostPage({
 		POST_QUERY,
 		"Post Page",
 		await params,
-		isDraftMode
+		isDraftMode,
 	);
 
 	if (!post) {
