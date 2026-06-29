@@ -8,8 +8,8 @@ import { type SanityDocument } from "next-sanity";
 import { PortableTextComponents } from "@portabletext/react";
 
 const { projectId, dataset } = client.config();
-export const urlFor = (source: SanityImageSource) =>
-	projectId && dataset
+export const urlFor = (source: SanityImageSource | null | undefined) =>
+	projectId && dataset && source
 		? imageUrlBuilder({ projectId, dataset }).image(source)
 		: null;
 

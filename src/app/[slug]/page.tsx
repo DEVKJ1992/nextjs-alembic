@@ -26,14 +26,14 @@ export async function generateMetadata({
 
 	const title = post.metaTitle
 		? post?.metaTitle + " | Alembic" ||
-			"Casual AI Platform & Intelligent Simulation Solution | Alembic"
+			"Causal AI Platform & Private Intelligence Solution | Alembic"
 		: post.shortTitle
 			? post?.shortTitle + " | Alembic"
 			: "Blog | Alembic";
 
 	const description = post.metaDescription
 		? post?.metaDescription ||
-			"Uncover marketing success with Alembic's AI-driven analytics. Predict revenue outcomes, optimize media spend, and gain actionable insights in real-time."
+			"Alembic is the Causal AI decision-making platform that reveals what truly drives growth and business outcomes. Combining applied science, private supercomputing infrastructure, and the scale required by Fortune 500 and Global 2000 enterprises."
 		: "contact us for more information";
 
 	const metaImage = urlFor(post?.metaImage)?.url() ?? "";
@@ -144,7 +144,7 @@ export default async function PostPage({
 							customer engagement metrics and drive business
 							success. Book a demo with Alembic and harness the
 							power of data-driven intelligence to achieve your
-							2025 goals and beyond.
+							2026 goals and beyond.
 						</p>
 						<Link
 							href="/book-a-consultation"
